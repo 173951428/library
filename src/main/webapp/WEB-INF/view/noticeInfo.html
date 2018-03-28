@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>公告</title>
+		<link rel="stylesheet" type="text/css" href="css/qian/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/notice.css"/>
+		
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.html" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.html" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.html" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryBack.html" id="libraryBack">归还续借</a>
+					</li>
+					<li>
+						<a href="libraryList.html" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.html" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="w">
+			<img src="images/qian/banner.jpg" />
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.shtml">首页</a>→<a href="libraryPublic.shtml">图书馆公告</a>→公告</span>
+			</div>
+		</div>
+		<!--公告-->
+		<div class="w notice">
+			<div class="notice-box">
+				<div class="notice-box-top">
+					<p class="notice-title" id="title"></p>
+					<p class="notice-time" >发布时间：<span id="publicTime"></span></p>
+					<p class="notice-author">发布人:<span id="author"></span></p>
+				</div>
+				<div class="notice-content">
+					<p id="content"></p>
+				</div>
+				<div class="notice-return">
+					<a href="javascript:history.go(-1);">返回上个页面</a>
+				</div>
+			</div>
+		</div>
+		<!--底部区域-->
+		<div class="down">
+			<div class="down-tel w">
+				<p>图书馆地址：河北省石家庄市新乐市空港工业园区无繁路69号</p>
+				<p>联系方式：0311-888888888</p>
+				<p>版权信息：Copyright © 图书馆</p>
+				<p>技术支持:李素杰</p>
+			</div>
+		</div>
+		
+	<!-- 	<script src="js/public.js" type="text/javascript" charset="utf-8"></script> -->
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script src="js/swiper-3.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script> 
+		<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/form-validator.js"></script> 
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+        <script type="text/javascript" src="js/dictionary.js" ></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/jquery.params.js" ></script>
+		<script type="text/javascript">
+		
+		  $(function (){
+			
+			  intiPage();
+		  })
+		  
+		  function intiPage(){
+					//父页面传过来的id 
+					id= $.query.get("id");
+			
+					if(id != null && id != ""){
+						$("#id").val(id);
+						var param = {id:id};
+						
+						var httpRequest = new HTTPRequest({
+							url : "notice/queryById.ajax", 
+							data : param,
+							successFunc : function (data) {
+							    if(data!=null){
+								     (data.title==null||data.title=="")? $("#title").html("暂无标题"):$("#title").html(data.title);
+								     (data.publicTime==null||data.publicTime=="")? $("#publicTime").html("暂无发布日期"):$("#publicTime").html(data.publicTime);
+								     (data.userName==null||data.userName=="")? $("#author").html("无"):$("#author").html(data.userName);
+								     (data.details==null||data.details=="")? $("#content").html("暂无内容"):$("#content").html(data.details);
+							    	}
+							    }
+						});
+					
+						httpRequest.sendJSON();
+					
+					}
+					
+			
+		  }
+		</script>
+	</body>
+</html>

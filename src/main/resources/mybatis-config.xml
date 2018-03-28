@@ -1,0 +1,16 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>
+	<!-- <properties>
+		<property name="dialect" value="mysql"/>
+	</properties>
+	<typeAliases>
+		<typeAlias alias="supplierEntity" type="cn.zuohd.ams.model.supplier.Supplier" />
+	</typeAliases>  -->
+	<settings>
+		<!-- 启用 缓存 -->
+		<setting name="cacheEnabled" value="true" />
+	</settings>
+    <plugins>   <!-- 配置使用Mybatis的拦截器的类  -->
+		<plugin interceptor="com.library.system.utils.PaginationInterceptor" />
+	</plugins>
+</configuration>

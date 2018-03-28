@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.library.system.entity.NoticeEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="public_time" property="publicTime" jdbcType="DATE" />
+    <result column="pubilc_author_id" property="pubilcAuthorId" jdbcType="VARCHAR" />
+    <result column="is_public" property="isPlulic" jdbcType="INTEGER" />
+    
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title,details,publicTime,pubilcAuthorId,isPlulic
+  </sql>
+  <!-- 前台用的 查询7条数据 -->
+  <select id="showNotice" resultType="map">
+      SELECT n.id AS id, n.title AS title,n.public_time AS publicTime  FROM notice n LEFT JOIN myuser  m ON  n.pubilc_author_id=m.id  WHERE n.is_public=1 ORDER BY n.public_time  DESC LIMIT 7
+  </select>
+  
+  
+  <select id="selectById" parameterType="INTEGER" resultType="map">
+  	SELECT 
+	 	 n.title title,
+	 	 n.public_time publicTime,
+	 	 m.username userName,
+		 n.details details
+	FROM
+  		notice n 
+  	INNER JOIN myuser m 
+   		 ON m.id = n.pubilc_author_id 
+	WHERE n.id =#{id}	
+   
+  </select>
+   <!-- 后台用的查询全部 -->
+   <select id="queryAllByPage" resultType="map">
+      SELECT n.id AS id, n.title AS title,n.public_time AS publicTime,m.username AS userName, n.details AS details  ,n.is_public AS isPublic FROM notice n LEFT JOIN myuser  m ON  n.pubilc_author_id=m.id  ORDER BY n.public_time
+  </select>	
+   <!-- 前台用的查询全部 -->
+    <select id="queryAllqianByPage" resultType="map">
+      SELECT n.id AS id, n.title AS title,n.public_time AS publicTime,m.username AS userName, n.details AS details  ,n.is_public AS isPublic FROM notice n LEFT JOIN myuser  m ON  n.pubilc_author_id=m.id  WHERE n.is_public=1 ORDER BY n.public_time
+  </select>	
+ 
+ 
+   <!-- 带条件的分页模糊查询 -->
+   <select id="queryAllSearchByPage" resultType="map" parameterType="map">
+       
+			SELECT 
+			  n.id AS id,
+			  n.title AS title,
+			  n.public_time AS publicTime,
+			  m.username AS userName,
+			  n.details AS details,
+			  n.is_public AS isPublic 
+			FROM
+			  notice n 
+			  LEFT JOIN myuser m 
+			    ON n.pubilc_author_id = m.id 
+			   where  1=1
+   				 <if test="title!=null and title!=''" >
+       			 and   n.title like   CONCAT('%',#{title},'%') 
+       			</if>
+       			
+       			 <if test="publicTime!=null and publicTime!=''" >
+       			 and  n.public_time = #{publicTime} 
+       			</if>
+			  ORDER BY n.public_time 
+   </select>
+  
+    <update id="NoticePublic" parameterType="INTEGER">
+       UPDATE notice SET is_public=1 WHERE ID=#{id}
+    </update>
+    
+     <update id="CancelPublic" parameterType="INTEGER">
+       UPDATE notice SET is_public=0 WHERE ID=#{id}
+    </update>
+    
+    <update id="updateNoticeById"  parameterType="map">
+       UPDATE notice SET title=#{title} ,details=#{details} where ID=#{id}
+    </update>
+    
+    <select id="queryById" resultType="map" parameterType="map">
+    select * from notice where id=#{id}
+    </select>
+   <delete id="deleteById" parameterType="INTEGER" >
+       DELETE FROM notice WHERE id=#{id}
+   </delete>
+  
+ <insert id="insertNotice"  parameterType="com.library.system.entity.NoticeEntity">
+       insert into notice
+       <trim prefix="(" suffix=")" suffixOverrides="," >
+        
+      <if test="title != null" >
+        title,
+      </if>
+      
+       <if test="details != null" >
+        details,
+      </if>
+      
+       <if test="publicTime != null" >
+        public_time,
+      </if>
+      
+      <if test="pubilcAuthorId != null" >
+        pubilc_author_id,
+      </if>
+     
+      
+       <if test="isPlulic != null" >
+       is_public,
+       </if>
+      
+      
+     </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+     
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>  
+      
+      <if test="details != null" >
+        #{details},
+      </if>  
+      
+       <if test="publicTime != null" >
+        #{publicTime},
+      </if>  
+      
+       <if test="pubilcAuthorId != null" >
+        #{pubilcAuthorId},
+      </if>  
+      
+       <if test="isPlulic != null" >
+        #{isPlulic},
+      </if>  
+      
+      
+    </trim>
+   </insert>
+   
+  
+</mapper>

@@ -1,0 +1,270 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+	 
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link href="css/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css">
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+		<title>用户维护页面</title>
+		<style type="text/css">
+		    .text-c{
+				 margin-left:100px;
+   				 margin-top: 20px;
+   				 }
+   				 
+   		   	.text-c th{
+   		   	  text-align:right;
+   		   	}
+   		   	.text-c td button{
+   		   	float: left;
+   		   	margin-left:40px;
+   		   	}	
+   		   	.text-c td input{
+   		   	width:100%;
+   		   	float:left;
+   		   	} 
+	  </style>
+	</head>
+	<!-- <style>
+	.mt-20 table{
+	margin-left: 25px;
+    margin-top: 20px;
+	}
+	</style> -->
+	<body>
+	<div class="breadcrumb">
+		<i class="Hui-iconfont"><img src="images/icon_subnav.png" /></i> 首页 
+		<span class="c-gray en">&gt;</span>操作
+		<span class="c-gray en">&gt;</span>用户维护
+		<a class="r mr-20 btn_sx" style="line-height:2.3em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+		  <i class="Hui-iconfont"><img src="images/icon_sx.png" /></i>
+		</a>
+	</div>
+	
+	
+	<!-- 条件查找的div start -->
+	 <div class="text-c top-searchbox2" id="searchform">  
+           <table border="0" cellpadding="0" cellspacing="0" class="top_sbox">
+             <tr>
+               
+                <th style="width:80px;"> 用户名：</th>
+                <td style="width:200px;"><input type="text"  value="" placeholder="" id="userName" name="userName"  class="input-text m_r10" onkeyup="this.value=this.value.replace(' ','')"/></td>
+               
+               
+               
+               <th style="width:80px;">权限：</th>
+               <td style="width:100px;">
+               <span class="select-box inline" style="width:100%;margin-right:10px;*border:none;">
+				    <select name="level" id="level" class="select"  style="width:100%">
+					  <option value = "0" >管理员</option>
+					  <option value = "1">普通用户</option>
+				    </select>
+				  </span>	
+               </td>
+
+               <td><button name="btnSearch" id="btnSearch" class="btn btn-success btn-radius" type="button" onClick="search();">查询</button></td>
+             </tr>
+           </table>
+       </div>		   
+	  	
+	<!-- 条件查找的div end -->
+	
+	
+	<div id="divCenter" style="margin-top:10px" >	  
+		 <div class="pd-20">
+			<input type="hidden" id="id" name="id">
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+				<span class="l" style="margin-right:5px;">
+					<button class="btn btn-primary radius" id="addBase" onclick="myUserAdd()" href="javascript:;">
+						<i class="Hui-iconfont">&#xe600;</i> 添加用户
+					</button>					
+				</span>	   
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
+						<tr class="text-c">
+						    <th width="80">姓名</th>
+							<th width="80">密码</th>
+							<th width="80">性别</th>
+							<th width="80">邮件</th>
+							<th width="80">电话</th>
+							<th width="80">权限</th>
+							<th width="80">操作</th>
+						</tr>
+					</thead>
+					<tbody id="pagingShowContainer">
+						
+					</tbody>
+				</table>
+				
+				 <table style="margin-top: 10px;margin-left: 5px">
+					<tr>
+						<td align="left" id="countContainer">总 0 条  每页5 条  共 1 页</td>
+						<td align="right" id="pagingIndexContainer"></td>
+					</tr>
+				</table>
+			</div>
+			
+		
+		</div>
+         
+		
+		</div>
+		</body>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		 <script type="text/javascript" src="uploadify/jquery.uploadify.js" ></script>
+		<!-- 第一步：编写模版。你可以使用一个script标签存放模板，如： -->
+		<script id="pageTemplate" type="text/html">
+			{{# for(var i = 0, len = d.pageList.length; i < len; i++){ }}
+			<tr class="text-c">
+				<td>{{ d.pageList[i].userName}}</td>
+                <td>{{ d.pageList[i].userPassword}}</td>
+				<td>{{ d.pageList[i].sex=="0"?"男":"女"}}</td>
+ 				<td>{{ d.pageList[i].email}}</td>
+				<td>{{ d.pageList[i].telephone}}</td>
+				<td>{{ d.pageList[i].level=="0"?"管理员":"普通用户"}}</td>
+				<td class="td-manage">
+					<a title="修改" href="javascript:;" onclick="UserEdit('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/edit16x16.png"></u></i></a>
+					<a title="删除" href="javascript:;" onclick="UserDeleteById('{{ d.pageList[i].id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/delete16x16.png"></u></i></a>
+                   
+				</td>
+			</tr>
+			{{# } }}
+		</script>
+		
+		<!-- 第三步：渲染模版 -->
+ 		<script type="text/javascript">
+		
+		    
+		
+			 function paging(){
+				 var pgObj = new Object();
+				 pgObj.sqlStatement = "mapper.MyUserMapper.queryAllByPage";
+				 pgObj.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+				 pgObj.showContainer="pagingShowContainer"; //指定查询哪个表格 
+				 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+				 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+				 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+				 ZcefUtils.pagingQuery(pgObj);
+				 
+			}
+			 
+			 
+			$(function(){
+				paging();
+			}); 
+			
+			
+			//模糊查询
+		     function search(){
+		    	 var userName=$("#userName").val();
+		    	  
+		    	 var level=$("#level").val();
+		    	 
+		    	 if((userName!=""&&userName!=null)||(level!=""&&level!=null)){
+		    		 
+		    		 $("#searchform").find("#userName").val(userName);
+		    		 $("#searchform").find("#level").val(level);
+		    		 
+		    		 var pgObjSearch = new Object();
+	        		 
+	        		 pgObjSearch.sqlStatement = "mapper.MyUserMapper.queryAllSearchByPage";
+	        		 pgObjSearch.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+					 
+	        		 pgObjSearch.paramContainer = "searchform";// 指定查询参数  ..
+					 
+	        		 pgObjSearch.showContainer="pagingShowContainer"; //指定查询哪个表格 
+					 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+					 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+					 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+					 ZcefUtils.pagingQuery(pgObjSearch);
+		    		 
+		    	 }else{
+		    		 
+		    		 paging();
+		    	 }
+		     }
+		   	
+			//增加用户的页面 
+			function myUserAdd(){
+				$("#id").val("");
+				ZcefUtils.openUpdateLayer({
+					title:'添加用户 ',
+					url:'MyUserEdit.shtml',
+					wigth:"500",
+					height:"300",
+					openAfterFunc:function(layero, index){
+				    },
+				  
+				   closeFunc:paging//添加完成后，再次刷新查询页面，这里传入的回调函数是分页函数
+				});
+			}
+			
+			
+			 //修改
+			function UserEdit(id){
+				$("#id").val(id);
+				ZcefUtils.openUpdateLayer({
+					title:'修改用户',
+					url:'MyUserEdit.shtml',
+					wigth:"500",
+					height:"300",
+					openAfterFunc:function(layero, index){
+						
+				    },
+					closeFunc:paging//添加完成后，再次刷新查询页面，这里传入的回调函数是分页函数
+				});
+			}
+			
+			
+			function UserDeleteById(id){  
+				  if(id!= null && id !=""){
+						ZcefUtils.confirmLayerWithResult({
+							url:"user/deleteById.ajax",
+							tipsMessage:"是否确定删除此条数据?",
+								param:{id:id},
+								afterFunc:function (result){
+									if(result==1){
+										layer.msg('删除成功！', {
+										    icon: 1,
+										    time: 1000
+										}, function(){
+											paging();
+										}); 
+									}
+								} 
+								
+							});	
+					}
+			} 
+			
+			
+			
+		</script>
+</html>

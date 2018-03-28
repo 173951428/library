@@ -1,0 +1,220 @@
+﻿	<!DOCTYPE HTML>
+<html>
+  <head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<LINK rel="Bookmark" href="/favicon.ico" >
+		<LINK rel="Shortcut Icon" href="favicon.ico" />
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<title>图书借阅系统</title>
+	</head>
+	<body>
+		<header class="Hui-header" style="margin:0 0;padding:0 0;"> <a class="Hui-logo">图书借阅系统</a> <a class="Hui-logo-m l" href="javascript:void(0)" title="fts"></a> 
+			<!-- <nav class="mainnav cl" id="Hui-nav">
+				<ul>
+					<li class="dropDown dropDown_click"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu radius box-shadow">
+							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
+							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
+							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav> -->
+			<!-- <ul class="Hui-userbar">
+				<li>超级管理员</li>
+				<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+					<ul class="dropDown-menu radius box-shadow">
+						<li><a href="#">个人信息</a></li>
+						<li><a href="#">切换账户</a></li>
+						<li><a href="#">退出</a></li>
+					</ul>
+				</li>
+				<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+				<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+					<ul class="dropDown-menu radius box-shadow">
+						<li><a href="javascript:;" data-val="default" title="默认（蓝色）">默认（蓝色）</a></li>
+						<li><a href="javascript:;" data-val="black" title="黑色">黑色</a></li>
+						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+						<li><a href="javascript:;" data-val="orange" title="绿色">橙色</a></li>
+					</ul>
+				</li>
+			</ul> -->
+			<ul class="Hui-userbar" id = "userInfo">
+				<a href="javascript:void(0);" style="width: 100%; text-align: center; margin: 0 auto; color: white; margin-right: 20px;" onclick="out();">退出</a>
+				
+				<i class="Hui-iconfont">
+                                                           登陆账号:<span id="loginName" style="font-family:microsoft yahei"></span>
+				</i>
+				
+			</ul>
+			<a aria-hidden="false" class="Hui-nav-toggle" href="#"></a> </header>
+		<aside class="Hui-aside">
+			<input runat="server" id="divScrollValue" type="hidden" value="" />
+			<div class="menu_dropdown bk_2" id="menu_dropdown_bk" >
+			
+				<dl id="menu-article"> <!-- 首先默认不显示,根据权限进行显示节点 -->
+					<dt><i class="Hui-iconfont"><img src="images/icon_cqgl.png"></i>用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dd>
+						<ul>
+		                    <li id="a-2"><a _href="UserMng.shtml" href="javascript:void(0)" id="jobGroupMng_1">用户列表</a></li> 
+                    		 <li id="a-1"><a _href="NoticeMng.shtml" href="javascript:void(0)" id="jobMng_1">公告管理</a></li>
+                    		<li id="a-3"><a _href="BooksManageMng.shtml" href="javascript:void(0)" id="taskGroupDeal_1">图书管理</a></li>
+                    		<li id="a-4"><a _href="superAdminAuthority.shtml" href="javascript:void(0)" id="authority_1">测试导航菜单1.1</a></li>
+                    		 <li id="a-2"><a _href="UserMng.shtml" href="javascript:void(0)" id="jobG">测试导航菜单1.2</a></li>
+						</ul>
+					</dd>
+				</dl>
+				
+				<dl id="menu-article2">	<!-- 首先默认不显示,根据权限进行显示节点 -->				
+					<dt><i class="Hui-iconfont"><img src="images/icon_rygl.png"></i>导航菜单2<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dd>
+						<ul><li id="a-2"><a _href="jobGroupMng.shtml" href="javascript:void(0)" id="jobGroupMng_2">导航菜单2.1</a></li> 
+                    		 <li id="a-1"><a _href="jobMng.shtml" href="javascript:void(0)" id="jobMng_2">导航菜单2.2</a></li>
+                    		<li id="a-3"><a _href="taskGroupDeal.shtml" href="javascript:void(0)" id="taskGroupDeal_2">导航菜单2.3</a></li>
+                    		<li id="a-4"><a _href="taskGroupCheck.shtml" href="javascript:void(0)" id="taskGroupCheck_2">导航菜单2.4</a></li>
+                    		<li id="a-4"><a _href="adminAuthority.shtml" href="javascript:void(0)" id="authority_2">导航菜单2.5</a></li>
+						</ul>.
+					</dd>
+				</dl>
+				
+				
+				<dl id="menu-article3" >	<!-- 首先默认不显示,根据权限进行显示节点 -->				
+					<dt><i class="Hui-iconfont"><img src="images/icon_rygl.png"></i>导航菜单3<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dd>
+						<ul><li id="a-2"><a _href="jobGroupMng.shtml" href="javascript:void(0)" id="jobGroupMng_3">导航菜单3.1</a></li> 
+                    		 <li id="a-1"><a _href="jobMng.shtml" href="javascript:void(0)" id="jobMng_3">导航菜单3.2</a></li>
+                    		<li id="a-3"><a _href="taskGroupDeal.shtml" href="javascript:void(0)" id="taskGroupDeal_3">导航菜单3.4</a></li>
+						</ul>
+					</dd>
+				</dl>
+				
+			</div>
+	
+		</aside>
+		<div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+		<section class="Hui-article-box">
+			<div id="Hui-tabNav" class="Hui-tabNav">
+				<div class="Hui-tabNav-wp">
+					<ul id="min_title_list" class="acrossTab cl">
+						<li class="active"><span title="我的桌面" data-href="welcome.shtml">我的桌面</span><em></em></li>
+					</ul>
+				</div>
+				<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+			</div>
+			<div id="iframe_box" class="Hui-article">
+				<div class="show_iframe">
+					<div style="display:none" class="loading"></div>
+					<iframe scrolling="yes" frameborder="0" src="welcome.shtml"></iframe>
+				</div>
+			</div>
+		</section>
+	</body>
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/json2.js"></script>
+	<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+	<script type="text/javascript" src="js/H-ui.js"></script> 
+	<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+	<script type="text/javascript" src="js/mask.js"></script>
+	<script type="text/javascript" src="js/httpRequest.js"></script>
+	<script type="text/javascript" src="js/zcefUtils.js"></script>
+	<script type="text/javascript">
+	
+	$(function(){
+		initPage();
+	});	
+	
+	 //初始化页面,查询是否为管理员 
+	 function initPage(){
+		 
+			 var name=sessionStorage.getItem("name");
+		    $("#loginName").html(name);
+		 
+			/* var param = {username:name};
+			var httpRequest = new HTTPRequest({
+				url : "user/adminQuery.ajax",
+				data :param , 
+				successFunc : function (data) {
+					if(data == "1"){ //超级管理员操作 
+						$("#menu-article").show();
+						$("#jobGroupMng_1").show();
+						$("#jobMng_1").show();
+						$("#taskGroupDeal_1").show();
+						$("#taskGroupCheck_1").show();
+						$("#authority_1").show();
+									
+					}else if(data == "2"){  //管理员操作
+						$("#menu-article2").show();
+						$("#jobGroupMng_2").show();
+						$("#jobMng_2").show();
+						$("#taskGroupDeal_2").show();
+						$("#taskGroupCheck_2").show();
+						$("#authority_2").show();
+						
+					}else if(data=="3"){  //用户操作
+						$("#menu-article3").show();
+						$("#jobGroupMng_3").show();
+						$("#jobMng_3").show();
+						$("#taskGroupDeal_3").show();
+						
+						    
+
+					}else if(data=="4"){ //不存在权限的 用户 
+						layer.alert('当前用户无权限,请联系管理员 !',{icon: 5,title:'提示'});
+						 $("#menu_dropdown_bk").hide();  
+					}	
+		        }					   
+			}); */
+			
+	       // httpRequest.sendJSON(); 
+	} 
+	
+	
+	/*资讯-添加*/
+	 function article_add(title,url){
+		var index = layer.open({
+			type: 2,
+			title: title,
+			content: url
+		});
+		layer.full(index);
+	}
+	/*图片-添加*/
+	function picture_add(title,url){
+		var index = layer.open({
+			type: 2,
+			title: title,
+			content: url
+		});
+		layer.full(index);
+	}
+	/*产品-添加*/
+	function product_add(title,url){
+		var index = layer.open({
+			type: 2,
+			title: title,
+			content: url
+		});
+		layer.full(index);
+	}
+	/*用户-添加*/
+	function member_add(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+	
+	
+	function out(){
+		 top.location='login.html';
+	}
+	</script> 
+</html>

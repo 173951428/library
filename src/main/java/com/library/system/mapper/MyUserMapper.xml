@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.MyUserMapper" >
+  <resultMap id="BaseResultMap" type="com.library.system.entity.MyUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="passwordagain" property="userPasswordAgain" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+     <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username,password,passwordagain,sex,telephone,email,level
+  </sql>
+  <select id="queryAllByPage" resultMap="BaseResultMap">
+      select 
+      <include refid="Base_Column_List" />
+      from myuser 
+  </select>
+  
+     <!-- 带条件的分页模糊查询 -->
+   <select id="queryAllSearchByPage" resultMap="BaseResultMap" parameterType="map">
+     select * from myuser where 1=1
+        <if test="userName!=null and userName!=''" >
+        and   userName like   CONCAT('%',#{userName},'%') 
+       </if>
+       and level=#{level}
+   </select>
+   
+  
+  <select id="selectByMap" resultType="map">
+      select * from myuser 
+  </select>
+  <!-- 检查用户是否存在 -->
+  <select id="checkUserExit" resultMap="BaseResultMap" parameterType="com.library.system.entity.MyUser" >
+    select 
+      <include refid="Base_Column_List" />
+      from myuser where  username=#{userName,jdbcType=VARCHAR} and password=#{userPassword,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="checkUser" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from myuser where   username=#{userName,jdbcType=VARCHAR}
+  </select>
+  <!-- 根据Id查询 -->
+   <select id="queryById" resultMap="BaseResultMap" parameterType="string">
+    select 
+      <include refid="Base_Column_List" />
+      from myuser where id=#{id}
+   </select>
+   
+   <insert id="insertMyUser"  parameterType="com.library.system.entity.MyUser">
+       insert into myuser
+       <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="id != null" >
+        id,
+      </if>
+      <if test="userName != null" >
+        username,
+      </if>
+      
+       <if test="userPassword != null" >
+        password,
+      </if>
+      
+       <if test="userPasswordAgain != null" >
+        passwordagain,
+      </if>
+      
+      <if test="sex != null" >
+        sex,
+      </if>
+     
+      
+       <if test="telephone != null" >
+       telephone,
+       </if>
+      
+      <if test="email != null" >
+        email,
+      </if>
+      
+       <if test="level != null" >
+        level,
+      </if>
+     </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>  
+      
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>  
+      
+       <if test="userPasswordAgain != null" >
+        #{userPasswordAgain,jdbcType=VARCHAR},
+      </if>  
+      
+       <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>  
+      
+       <if test="telephone != null" >
+        #{telephone,jdbcType=INTEGER},
+      </if>  
+      
+        <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if> 
+      
+       <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      
+    </trim>
+   </insert>
+   
+   <update id="updateMyUser" parameterType="string">
+       update myuser
+    <set >
+       <if test="userName != null" >
+        username = #{userName},
+      </if>
+      <if test="userPassword != null" >
+        password = #{userPassword},
+      </if> 
+      
+       <if test="userPasswordAgain != null" >
+        passwordagain = #{userPasswordAgain},
+      </if>
+      
+      <if test="sex != null" >
+        sex = #{sex},
+      </if>
+      
+       <if test="telephone != null" >
+         telephone = #{ telephone},
+      </if>
+      
+      <if test="email != null" >
+         email = #{email},
+      </if>
+      
+       <if test="level != null" >
+         level = #{level}
+      </if>
+    </set>
+    where id = #{id}
+   </update>
+   <!-- 根据用户名修改密码 -->
+   <update id="changePassword" parameterType="map">
+    update myuser set password=#{userPassword},passwordagain=#{passwordAgain} where username=#{userName}
+   </update>
+   
+   <delete id="deleteById" parameterType="string">
+      delete from  myuser where id=#{id}
+   </delete>
+   
+   <select id="getMapBycardNumber" resultType="java.util.Map" parameterType="java.util.List">
+      SELECT id FROM myuser WHERE id IN
+     <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+         #{item}
+     </foreach>  
+   </select>
+   
+   <delete id="deleteIds" parameterType="java.util.List">
+       delete from   MyUser where id IN 
+       <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+          #{item}
+       </foreach>   
+   </delete>
+   
+   <insert id="insertMyUserByExcel" parameterType="java.util.List">
+       insert into myuser (id,username,password,sex,address) values
+       <foreach collection="list" item="item" index="index" separator=",">
+        (#{item.id},#{item.userName},#{item.userPassword},#{item.sex},#{item.addresss})  
+       </foreach>
+   </insert>
+   
+   <select id="checkUserAndEmail"  resultType="java.lang.Integer" parameterType="map">
+     select count(*) from myuser where username=#{userName,jdbcType=VARCHAR} and email=#{email,jdbcType=VARCHAR}
+   </select>
+</mapper>

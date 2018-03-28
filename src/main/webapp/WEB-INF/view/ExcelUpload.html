@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link href="css/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css">
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+		<link href="uploadify/uploadify.css" rel="stylesheet" type="text/css">
+        <title>文件上传</title>
+</head>
+<body>
+          <div style="margin-top:10px; margin-left: 5px;">
+     			 <span style="float:left;width:120px;text-align:left;">
+					 <input type="file" id="up_file" style="float:left;" />				     
+				 </span> 
+				<!--   这是文本框,用于存放文件. -->
+				  <input type="text" id="fileName" class="input-text"  style="margin-left: 19px;height:32px;width: 200px;text-align:center" readonly />
+				<!--    这是上传点击按钮  -->
+				  <a href="javascript:$('#up_file').uploadify('upload','*')" id="" class="btn btn-primary radius " style="width:75px;margin-left:10px;">上传</a> 
+				  <span id="resultTextSource" style="color:red"></span>
+				  
+				  <button class="btn btn-primary radius" id="downloadButton" onclick="downloadModel()">
+						<i class="Hui-iconfont">&#xe600;</i> 下载用户导入模版
+				   </button>
+         </div> 
+</body>
+
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		 <script type="text/javascript" src="uploadify/jquery.uploadify.js" ></script>
+		 
+		 <script type="text/javascript">
+		 $(function(){	
+			
+			 uploadifyTaskGroup();
+			}); 
+		    //任务组上传的JS  
+		  function uploadifyTaskGroup(){
+		    	
+			  $("#up_file").uploadify({
+					'swf' : 'uploadify/uploadify.swf',
+					 'uploader' : 'user/uploadMyUsers.ajax',
+					'buttonText' : '选择用户批量导入',
+					'multi' : false,
+					'auto' : false,
+					'fileTypeDesc'   : '支持格式:xls/xlsx.',    
+					'fileTypeExts': '*.xlsx;*.xls',//允许的格式 
+					'fileObjName' : 'file',
+					//上传之后的Js
+					'onUploadSuccess' : function(file, data, response) {
+						if(data == "succes"){
+							
+							layer.msg('上传成功', {
+							    icon: 6,
+							    time: 2000
+							}); 
+						}else{
+							alert(data);
+						}
+											
+					},
+					//上传之前,可以自定义上传参数的Js					
+					 'onUploadStart': function (file) {
+					 	var name=sessionStorage.getItem("userName");
+						$("#up_file").uploadify("settings", "formData", {
+			    			'userName' :name
+			    		}); 
+			        },			        
+					'onSelect' : function(file){
+						
+						$("#fileName").val('');
+						$("#fileName").val(file.name);
+					} 
+				}
+
+	            );
+			  }
+		    
+		    function downloadModel(){
+		    	window.location.href="file/用户批量上传.xlsx";
+		    }
+		  </script>
+</html>

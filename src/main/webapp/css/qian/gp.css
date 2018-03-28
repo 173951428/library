@@ -1,0 +1,411 @@
+* {
+	margin: 0;
+	padding: 0;
+	 boxsizing:border-box;
+}
+
+li {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+input,
+button {
+	outline: none;
+	border: none;
+}
+
+
+/*
+ * 固定元素的宽度与居中
+ */
+
+body {
+	background: #f9f9f9;
+	
+}
+
+.w {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+
+/*导航栏*/
+
+.header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.logo {
+	width: 600px;
+	height: 100px;
+	/*float: left;*/
+}
+
+.pic1 {
+	width: 80px;
+	height: 80px;
+}
+
+.pic2 {
+	width: 400px;
+	height: 55px;
+}
+
+.nav {
+	height: 30px;
+	/*background-color: #;*/
+}
+
+.nav>ul>li {
+	float: left;
+	text-align: center;
+	width: 200px;
+	height: 30px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.nav>ul>li:hover {
+	color: #1676ec;
+	border-bottom: 2px solid #0c4d9d;
+}
+
+
+/*banner*/
+
+.banner>img {
+	width: 1200px;
+	height: 200px;
+}
+
+.place {
+	height: 30px;
+	border-bottom: 2px solid #bc8423;
+}
+
+.place-w {
+	float: right;
+	margin-top: 5px;
+}
+
+
+/*内容区域*/
+
+.content {
+	height: 800px;
+}
+
+
+/*图书类别*/
+
+.content-left {
+	width: 400px;
+	height: 330px;
+	padding-top: 5px;
+	float: left;
+}
+
+.sp {
+	font-size: 20px;
+	font-weight: 600;
+	color: brown;
+	margin-left: 10px;
+}
+
+.more {
+	width: 160px;
+	height: 30px;
+	float: right;
+	margin-right: 10px;
+}
+
+.more>img {
+	margin-top: 5px;
+	float: right;
+}
+
+.more>a {
+	font-size: 20px;
+	float: right;
+	margin-top: 2px;
+	color: #fff;
+	margin-right: -70px;
+}
+
+.ul {
+	width: 350px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.UL1 {
+	float: left;
+	width: 170px;
+	text-align: center;
+}
+
+.UL1>li {
+	height: 30px;
+	width: 150px;
+	margin-top: 5px;
+	background-color: #fcc76c;
+}
+
+.UL1>li:hover {
+	background-color: darkgoldenrod;
+}
+
+.UL1>li>a {
+	font-size: 20px;
+}
+
+.UL1>li:hover a {
+	color: #fff;
+}
+
+
+/*公告*/
+
+.content-right {
+	width: 750px;
+	height: 330px;
+	float: right;
+	margin-top: 5px;
+}
+
+.public {
+	width: 700px;
+	height: 280px;
+	margin: 0 auto;
+	background-color: #99ccff;
+	margin-top: 10px;
+}
+
+.public>a {
+	font-size: 20px;
+	line-height: 35px;
+	margin-left: 20px;
+}
+
+.public>a:hover {
+	padding: 0 0 0 10px;
+	color: red;
+}
+
+.public>a>span {
+	float: right;
+	margin-right: 20px;
+}
+
+
+/*新书推荐*/
+
+.new-book {
+	float: left;
+	width: 400px;
+	height: 400px;
+	padding-top: 5px;
+}
+
+.UL2 {
+	float: left;
+	width: 350px;
+}
+
+.UL2>li {
+	width: 300px;
+	height: 40px;
+	padding-top: 10px;
+}
+
+.UL2>li:hover {
+	box-shadow: 0px 0px 30px 10px #abcdef;
+}
+
+.UL2>li>a {
+	font-size: 20px;
+}
+
+.UL2>li>img {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 3px;
+	padding-right: 20px;
+	padding-left: 10px;
+}
+
+
+/*弹窗*/
+
+.pic-win {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/*padding-top: 100px;*/
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	overflow: auto;
+	cursor: pointer;
+	/*text-align: center;*/
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9);
+	/* Black w/ opacity */
+}
+
+.pic-win1 {
+	/*text-align: center;*/
+}
+
+.pic-win1>img {
+	width: 460px;
+	height: 500px;
+	margin-left: 100px;
+}
+
+.close {
+	/*position: absolute;*/
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+	/*width: 500px;*/
+	height: 40px;
+	/*margin: 0 auto;*/
+}
+
+.close:hover,
+.close:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.close>span {
+	float: right;
+	/*margin-left: 440px;*/
+}
+
+
+/*表格*/
+
+.tab {
+	border-collapse: collapse;
+	border-spacing: 0;
+	float: right;
+    color: #fff;
+    margin-right: 200px;
+}
+
+/*table,
+td,
+th {
+	border: 1px solid black;
+}*/
+
+.td1 {
+	width: 100px;
+	height: 50px;
+}
+
+.td2 {
+	width: 400px;
+	height: 50px;
+}
+
+
+/*动画*/
+
+.pic-win1>img {
+	-webkit-animation-name: zoom;
+	-webkit-animation-duration: 0.6s;
+	animation-name: zoom;
+	animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+	from {
+		-webkit-transform: scale(0)
+	}
+	to {
+		-webkit-transform: scale(1)
+	}
+}
+
+@keyframes zoom {
+	from {
+		transform: scale(0)
+	}
+	to {
+		transform: scale(1)
+	}
+}
+/*图书排行榜*/
+.book-list{
+	width: 750px;
+    height: 400px;
+    float: right;
+    margin-top: 5px;
+}
+.book-list>img{
+	width: 750px;
+    height: 400px;
+}
+.UL3{
+	width: 350px;
+	margin-left: 20px;
+}
+.UL3>li{
+	width: 300px;
+    height: 40px;
+    padding-top: 10px;
+}
+.UL3>li:hover {
+	border-bottom: 2px solid red;
+}
+.UL3>li>img{
+	width: 20px;
+    height: 20px;
+    position: relative;
+    top: 3px;
+    padding-right: 20px;
+    padding-left: 10px;
+}
+.UL3>li>a{
+	font-size: 20px;
+}
+.UL3>li:hover a{
+	padding: 0 0 0 5px;
+	font-size: 23px;
+	color: red;
+}
+/*页面底部*/
+.down{
+	height: 200px;
+	background-color: #000000;
+}
+.down-tel{
+	padding-top: 40px;
+}
+.down-tel>p{
+	color: #fff;
+	font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+}

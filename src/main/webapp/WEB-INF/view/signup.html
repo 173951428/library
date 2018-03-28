@@ -1,0 +1,289 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.back_btn input{
+      width:13%;
+      height:30px;
+      color:#000;
+      background:#69e;
+      border:none;
+      margin-top:10px;
+      outline:none;
+      font-size: 14px;
+}
+.back_btn input:hover{
+    background: #df5799;
+	color:#ffffff;
+}
+.rad{
+    color:#fff;
+    font-size: 14px;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    float: left;
+    width: 96.7%;
+    border-bottom: 1px solid #889ba0;
+}
+
+
+.rad p{
+       float: left;
+}
+</style>
+
+<title>图书借阅管理系统用户注册</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Internship Sign In & Sign Up Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/logincss/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/logincss/snow.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/logincss/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<!--<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+-->
+<!-- //web font -->
+
+<script type="text/javascript" src="js/loginjs/jquery-2.1.4.min.js"></script>
+
+	<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+	<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+	<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+	<script type="text/javascript" src="js/H-ui.js"></script> 
+	<script type="text/javascript" src="js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="js/json2.js" ></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/mask.js"></script>
+    <script type="text/javascript" src="js/httpRequest.js" ></script>
+    <script type="text/javascript" src="js/zcefUtils.js" ></script>
+     <script type="text/javascript" src="js/form-validator.js"></script> 
+    
+     <script type="text/javascript">
+    	//登录案件增加回车事件 
+	    document.onkeydown = function () { 
+			var theEvent = window.event; 
+			var code = theEvent.keyCode; 
+			if (code == 13) { 
+			$("#btn_register").click();  
+			
+			} 
+		} 
+   
+        //获取短信验证码		
+       function getMessage(){
+    	   var phoneNumber=$("#telephone").val();
+    	   if(null!=phoneNumber&&phoneNumber!=""){
+    		checkMessage(phoneNumber);
+    		var t,timer,bState = true;
+       	    t=180;
+   			clearInterval(timer);
+   			timer=setInterval(function(){
+   				bState = false;
+   				$("#checkMessage").val(t + " 秒后重新获取");
+   				$("#checkMessage").attr('disabled',"true"); //按钮不可用
+   				if(t==0){
+   					
+   					$("#checkMessage").removeAttr("disabled");
+   					$("#checkMessage").val("点击获取短信验证码");
+   					clearInterval(timer);
+   					bState = true;
+   				} 
+   				t--; 
+   			  },1000); 
+    		   
+    		   
+    	   }else{
+    		   layer.alert("请先填写电话号码!",{icon:5,title:'错误提示'}) 
+    	   }
+    	   
+    	  
+    	   
+       }
+       
+       //封装后台获取短信方法
+       function checkMessage(phoneNumber){
+	        var httpRequest = new HTTPRequest({
+				url : "user/checkMessage.ajax",
+				data : {phoneNumber:phoneNumber},
+				successFunc : function (data) {
+					if(data.code!="ERROE"){
+						sessionStorage.setItem("code",data.code);
+					}else{
+						layer.alert("网络异常,请稍后再试",{icon:5,title:'错误提示'}) 
+					}
+		        }
+			});
+		
+			httpRequest.sendJSON();
+	        
+       }
+    	
+    	
+		//保存 
+		function register(){
+			 
+			
+			if(validateForm("form-myuser-register")){
+				var password=$("#userPassword").val();
+				var passwordAgain=$("#userPasswordAgain").val();
+				if(password!=passwordAgain){
+					layer.alert("2次密码输入不匹配,请重新输入  !",{icon:5,title:'错误提示'})
+					$("#userPasswordAgain").val("");
+					return false;
+				}
+				
+				
+				
+				var email=$("#email").val();// 获取用户输入的email的值 。
+				var regEmail=/[a-zA-Z0-9]{1,10}@[a-zA-Z0-9]{1,5}\.[a-zA-Z0-9]{1,5}/;
+				
+				if(!regEmail.test(email)){
+					layer.alert("电子邮件格式错误,请重新输入  !",{icon:5,title:'错误提示'})
+					$("#email").val("");
+					return false;
+				}
+				 
+			    var telephone=$("#telephone").val();  //用户输入的电话 
+			    var reg=/^1[0-9]{10}/;
+			    if(!reg.test(telephone)){
+			    	layer.alert("电话号码不正确 ,请重新输入  !",{icon:5,title:'错误提示'})
+					$("#telephone").val("");
+					return false;
+			    }
+			    
+			    var checkCode=$("#checkCode").val();
+				 if(checkCode==""||null==checkCode){
+					 layer.alert("验证码不能为空   !",{icon:5,title:'错误提示'}) 
+					 return false
+				 }else{
+					 var code=sessionStorage.getItem("code");
+					 if(checkCode!=code){
+					 layer.alert("短信验证码不正确,请重新输入  !",{icon:5,title:'错误提示'})
+					 $("#checkCode").val("");
+					    return false;
+				     }
+				 }
+				
+				var paramSave = ZcefUtils.obtainValues("form-myuser-register");  
+				var httpRequest = new HTTPRequest({
+					url : "user/saveOrUpdate.ajax",
+					data : paramSave, 
+					successFunc : function (data) {
+						if(data==1){
+								layer.msg('增加成功！请登录', {
+								    icon: 1,
+								    time: 1000
+								}, function(){
+									 top.location='login.html';
+								}); 
+						}else {
+							layer.alert("网络繁忙,请稍后 !",{icon:5,title:'错误提示'}) 
+					}
+						
+					
+			        }					   
+				});
+				
+		        httpRequest.sendJSON(); 
+			}
+			
+		}
+		
+		 //检查注册用户名字，是否重复 
+		function checkUserName(){
+			  var userName=$("#userName").val();
+			  if(userName!=""&&userName!=null){	 
+				  var httpRequest = new HTTPRequest({
+						url : "user/checkUser.ajax",
+						data : {userName:userName}, 
+						successFunc : function (data) {
+							if(data==1){
+									layer.msg('该用户名已存在，请重新输入 ！', {
+									    icon: 1,
+									    time: 2000
+									}, function(){
+										$("#userName").val("");
+									}); 
+							}else if(data==0){
+							      return 	true;
+						     }else{
+						    	 layer.alert("网络繁忙,请稍后 !",{icon:5,title:'错误提示'}) 
+						     }
+							
+						
+				        }					   
+					});
+				  httpRequest.sendJSON(); 
+			  }
+		}
+    
+     
+	</script>
+</head>
+<body >
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<!-- <a href="index.html">登录</a><a href="signup.html" class="active">注册</a> -->
+</div>
+<h1>用户注册</h1>
+<div class="main-agileits">
+<!--form-stars-here-->
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">注册</h2>
+			<form action="#" method="post" id="form-myuser-register" class="form-myuser-register">
+					<input type="text" name="userName" id="userName" placeholder="用户名"   nullableError="用户名不能为空" onblur="checkUserName();" MaxLength=50/>
+				    <div class="rad">
+				     <p>  	性别 &nbsp; &nbsp;&nbsp;&nbsp;<input type="radio"name="sex" value="0" checked="checked">男
+				       	       <input type="radio"name="sex" value="1">女
+				      </p> 	     
+				    </div>
+					<input type="password" name="userPassword" id="userPassword" placeholder="密码" nullableError="密码不能为空" MaxLength=50/>
+					<input type="password" name="userPasswordAgain" id="userPasswordAgain" placeholder="再次输入密码"  nullableError="请再次输入密码" MaxLength=50/>
+					<input type="text" name="email" id="email" placeholder="电子邮件"  nullableError="电子邮件不能为空" MaxLength=25/>
+					<input type="text" name="telephone" id="telephone" placeholder="电话号码"  nullableError="电话不能为空" MaxLength=15/>
+					<input type="hidden" name="level" id="level" value="1"></input> <!-- 默认增加权限为普通用户 -->
+             	</form>
+
+	   <input type="text"  name="checkCode" id="checkCode" placeholder="验证码"   MaxLength=6/>		
+       <div class="back_btn" style="margin-left:339px; position: relative;
+           top: -65px;">
+			    <input type="button" name="checkMessage" id="checkMessage"  value="点击获取短信验证码" onclick="getMessage()" style="width:200px; background:#df5799 "> 
+			    
+		</div> 
+					
+				
+				<div class="submit-w3l">
+					<input type="button" id="btn_register" value="注册" onclick="register();">
+				</div>
+		
+			<div class="back_btn">
+			    <input type="button"  value="返回" onclick=" window.history.go(-1);">
+			</div>
+		</div>
+		</div>
+<!--//form-ends-here-->
+<!-- copyright -->
+	<div class="copyright w3-agile">
+		<p> © 2017  </p>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,220 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link href="css/H-ui.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+		<title>增加图书</title>
+		
+		<style type="text/css">
+		  .formTbl .tdLabel {
+           width: 5%;
+    
+}
+
+
+		</style>
+	</head>
+	<body>
+		<div class="pd-20">
+			<form action="" method="post" class="form form-horizontal" id="form-myuser-save">
+	
+			    
+			  <input type="hidden" id="id" name="id">
+		      
+		      
+		      
+				<fieldset>
+					<legend>添加图书</legend>
+					<table class="formTbl">
+						
+						<tr>
+							<td class="tdLabel"><font>图书编号：</font></td>
+							<td class="tdValue">
+								<input type="text" class="input-text" value="" placeholder="" id="bookNo" name="bookNo" nullableError="图书编号不能为空" MaxLength=50 />
+							</td>
+						 </tr>	
+						 
+						 <tr>
+							<td class="tdLabel"><font>书名：</font></td>
+								<td class="tdValue">
+								<input type="text" class="input-text" value="" placeholder="" id="bookName" name="bookName" nullableError="书名不能为空" MaxLength=30 />
+							</td>	
+						    
+						 </tr>
+						
+						 <tr>
+						     <td class="tdLabel"><font>作者：</font></td>
+							 <td class="tdValue" >
+							   <input type="text" class="input-text" value="" placeholder="" id="bookAuthor" name="bookAuthor" nullableError="作者不能为空" MaxLength=30 />
+							 </td>
+						  </tr>	
+						  
+						  <tr>
+							
+							 <td class="tdLabel"><font>出版时间：</font></td>
+								<td class="tdValue">
+									<input type="text" class="Wdate input-text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})"  id="bookOutTime" name="bookOutTime" nullableError="出版时间不能为空"  />
+							 </td>
+						  
+						  </tr>
+						
+						
+						 <tr>
+						    <td class="tdLabel"><font>图书详情：</font></td>
+								<td class="tdValue">
+								<input type="text" class="input-text" value="" placeholder="" id="bookInfomation" name="bookInfomation"  MaxLength=1000 />
+							</td>
+							
+						</tr>
+						
+						<tr>
+							<td class="tdLabel"><font>书架位置：</font></td>
+								<td class="tdValue">
+								<input type="text" class="input-text" value="" placeholder="" id="bookShelf" name="bookShelf"  MaxLength=30 /> 
+						    </td>						
+						</tr>
+						
+						
+						 <tr>
+						    <td class="tdLabel"><font>图书类型：</font></td>
+								<td class="tdValue">
+								<input type="text" class="input-text" value="" placeholder="" id="telephone" name="telephone" nullableError="电话不能为空" MaxLength=30 />
+							</td>
+							
+						</tr>
+						
+						<tr>
+							<td class="tdLabel"><font>库存数量：</font></td>
+								<td class="tdValue">
+									<input type="text" class="input-text" value="" placeholder="" id="bookCount" name="bookCount" nullableError="库存数量" MaxLength=30 /> 
+							    </td>						
+						   
+						</tr>
+						
+						<tr>
+							<td class="tdLabel"><font>图书封面图：</font></td>
+							 <td class="tdValue">
+  							<input type="hidden" id="bookImgUrl" name="bookImgUrl">
+							    <input type="file" id="uploadify"  name="uploadFiles"  multiple="true"/>
+							    <p id="uploadifyQueue"></p> 
+							    <a href="javascript:void(0)" onclick="showImg()" id="showImg"> 预览</a>
+							 </td>					
+						   
+						</tr>
+                      
+
+				</table>
+				</fieldset>
+			<div class="row cl">
+				<div class="divCenter">
+					<input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;" onclick="MyUserSave()">
+					<input class="btn btn-primary radius" type="reset" value="&nbsp;&nbsp;重置&nbsp;&nbsp;">
+				</div>
+			</div>
+			</form>
+		</div>
+		
+	
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script> 
+		<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/form-validator.js"></script> 
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+        <script type="text/javascript" src="js/dictionary.js" ></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+       <script type="text/javascript" src="lib/uploadify/jquery.uploadify.js" ></script>
+		<script type="text/javascript">
+			$(function(){
+			
+				initUploadify();
+				$("#showImg").hide();
+			});
+
+			   function initUploadify(){
+		             
+		              $('#uploadify').uploadify({
+		                // 连接后台的方法
+		                  "uploader":"books/uploadImg.ajax",    
+		　　　　　　　　　　// get方式提交
+		                  "method":"get",
+		                  "progressData" : "percentage",//显示上传进度方式
+		                  "removeCompleted": true, // 上传完毕,关闭进度条
+		                  "removeTimeout":1,
+		                  "swf":"lib/uploadify/uploadify.swf",
+		                  "buttonText":"点击上传图片",  //uploadify 控件按钮显示的文字
+		                  "multi":false,       //是否多文件上传
+		                  "fileObjName":"uploadFiles", //后台获取的文件对象名字,用于后台根据这个名字获取文件对象
+		                  "queueID":"uploadifyQueue", 
+		                  "fileTypeDesc":"请选择图片",
+		                  "fileTypeExts": "*.jpg;*.png;*.jpeg;*.gif;*.bmp", //规定上传的文件格式
+		                   
+		            
+		                  //检测FLASH失败调用
+		                 'onFallback': function () {
+		                    alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
+		                }, 
+		                  //上传成功以后的函数
+		                  "onUploadSuccess": function(file, data, response) {
+		                      var dataObj = JSON.parse(data);
+		                      if(dataObj.status){
+		                        $("#bookImgUrl").val(dataObj.urlImg);
+		                         alert("上传成功!");
+		                         $("#showImg").show();
+		                          
+		                      }else{
+		                    	  $("#bookImgUrl").val("");
+		                         alert("上传失败,请稍后再试!");
+		                      }
+		                   },
+		                   
+		                    //上传之前,可以自定义上传参数的Js                    
+		                 'onUploadStart': function (file) {
+		                	 var bookImgUrl=$("#bookImgUrl").val();
+		                	  alert(bookImgUrl);
+		                    $("#uploadify").uploadify("settings", "formData", { 
+		                       
+		                        'savePath': bookImgUrl
+		                    }); 
+		                },     
+		                  "onUploadError": function(file, errorCode, errorMsg, errorString) {
+		                     
+		                        alert(file.name + '上传失败!');
+		                    },
+		                  "onSelectError": function() {
+		                      
+		                      alert(file.name + ' 最多能选1个!');
+		                    }
+		                });
+		            }
+			   
+			   
+			   function showImg(){
+				   var bookImgUrl=$("#bookImgUrl").val(); 
+				   window.open(getRootPath()+"/"+bookImgUrl); 
+			   }
+			   
+			   function getRootPath()  
+			   {  
+			      var pathName = window.location.pathname.substring(1);  
+			      var webName = pathName == '' ? '' : pathName.substring(0, pathName.indexOf('/'));  
+			      return window.location.protocol + '//' + window.location.host + '/'+ webName;  
+			   }    
+			
+		</script>
+	</body>
+</html>

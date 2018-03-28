@@ -1,0 +1,29 @@
+.bookback-box{
+	padding: 30px 0;
+	text-align: center;
+}
+.bookback-box-nav{
+	width: 300px;
+	height: 50px;
+	float: left;
+    background-color: red;
+    font-size: 25px;
+    line-height: 50px;
+    border-radius: 20px 20px 0 0;
+}
+.bookback-box>div{
+	height: 500px;
+    border-radius: 0 0 20px 20px;
+}
+.bookback-color1{
+	background-color: lightpink;
+}
+.bookback-color2{
+	background-color: lightblue;
+}
+.bookback-color3{
+	background-color: lightcoral;
+}
+.bookback-color4{
+	background-color: lightgreen;
+}

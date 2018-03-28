@@ -1,0 +1,125 @@
+input,
+button,
+select,
+textarea {
+	vertical-align: middle;
+}
+
+table,
+td,
+th {
+	border: 1px solid black;
+}
+
+.loan-search {
+	padding-top: 30px;
+}
+
+.search-box {
+	/*width: 100%;
+	margin: 0 auto;
+	text-align: center;*/
+	/*padding: 30px 0;*/
+	text-align: center;
+}
+
+.search-box>p {
+	font-size: 30px;
+	font-weight: 600;
+	color: brown;
+}
+
+.search-box-inp {
+	height: auto;
+	margin: 30px 0;
+}
+
+.search-box-timing,
+.search-button {
+	width: 100px;
+	height: 40px;
+	font-size: 20px;
+}
+
+.search-box-timing {
+	border: 2px solid #000000;
+}
+
+.search-inp {
+	width: 400px;
+	height: 40px;
+	border: 2px solid royalblue;
+}
+
+.search-button {
+	background-color: royalblue;
+	color: #fff;
+	margin-left: -5px;
+	cursor: pointer;
+}
+
+
+/*搜索结果*/
+.lend-result{
+	padding: 30px 0;
+}
+.lend-result-p1{
+	font-size: 28px;
+	text-align: center;
+}
+.lend-result-top{
+	width: 900px;
+	margin: 0 auto;
+}
+.lend-box{
+	border: 1px solid lightslategray;
+    padding: 20px 30px;
+    margin: 5px 0;
+}
+.lend-box-i{
+	float: left;
+	display: block;
+	width: 150px;
+	height: 150px;
+	background: url(../images/qian/baishuo.jpg)no-repeat;
+	background-size:150px 150px;
+}
+.lend-title{
+	float: left;
+	padding: 10px 40px;
+}
+.lend-title>h6{
+	font-size: 25px;
+}
+.lend-title-sp1{
+	line-height: 30px;
+	margin-right: 10px;
+}
+.lend-title-sp1>a{
+	color: lightslategray;
+}
+.lend-title-p1>a{
+	color: red;
+}
+.lend-btn{
+	font-size: 18px;
+    margin-top: 10px;
+}
+.lend-btn>a{
+	display: inline-block;
+	width: 100px;
+    height: 36px;
+    text-align: center;
+    line-height: 34px;
+    border: 1px solid coral;
+    color: coral;
+    
+}
+.lend-btn>a:hover{
+	background-color: coral;
+    color: #fff;
+}
+.lend-result-tab {
+	border-collapse: collapse;
+	border-spacing: 0;
+}

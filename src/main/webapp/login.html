@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>图书借阅系统登录首页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Internship Sign In & Sign Up Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="css/logincss/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/logincss/snow.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/logincss/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<!--<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
+
+
+<!-- //web font -->
+< <script type="text/javascript" src="js/loginjs/jquery-2.1.4.min.js"></script>
+<!-- <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>  -->
+	<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+	<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+	<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+	<script type="text/javascript" src="js/H-ui.js"></script> 
+	<script type="text/javascript" src="js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="js/json2.js" ></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/mask.js"></script>
+    <script type="text/javascript" src="js/httpRequest.js" ></script>
+    <script type="text/javascript" src="js/zcefUtils.js" ></script>
+    <script type="text/javascript" src="js/form-validator.js"></script> 
+   <link rel="stylesheet" href="css/jquery.slider.css" />
+		<!-- <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+		 <script src="js/jquery.slider.min.js"></script> 
+     <script type="text/javascript">
+     
+     $(function(){
+    		$("#slider1").slider({
+				callback: function(result) {
+					var userName=$("#userName").val();
+					var userPassword=$("#userPassword").val();
+					if(userName==""||userPassword==""){
+						layer.alert("请先填写用户名和密码在解锁 ！",{icon:5,title:'错误提示'}) 
+						$("#slider1").slider("restore");
+					}else{
+						
+					$("#result1").text(result);
+					$("#isCheck").val(result);
+					}
+					//$("#tip_span").html("");
+				}
+			});
+     });
+    	//登录案件增加回车事件 
+	    document.onkeydown = function () { 
+			var theEvent = window.event; 
+			var code = theEvent.keyCode; 
+			if (code == 13) { 
+			$("#btn-login").click(); 
+			} 
+		} 
+
+   	      function login(){
+   			if(validateForm("from-user-login")){
+   				var isCheck=$("#isCheck").val();
+   				if(false==isCheck|| isCheck=="" ||null==isCheck || isCheck=="false"){
+   					
+   					layer.alert("请使劲右滑解锁先 ！",{icon:5,title:'错误提示'}) 
+   					return false;
+   				}
+   				
+   				var paramSave = ZcefUtils.obtainValues("from-user-login");
+   				var httpRequest = new HTTPRequest({
+					url : "user/login.ajax",
+					data : paramSave,  //获取表单的参数 
+					successFunc : function (data) {
+						 var name=$("#userName").val();
+						if(data==0){
+						 	sessionStorage.setItem("name",name);
+							window.location.href = "index.shtml";	//这是 管理员登录的首页 
+						}else if(data==1){
+							sessionStorage.setItem("name",name);
+							window.location.href = "libraryIndex.shtml";	//这是 用户 登录的首页 
+						}else if(data==2){
+							layer.alert("用户名或密码不正确!",{icon:5,title:'错误提示'}) 
+							return false;
+						} 						
+			        }					   
+				});
+   			      httpRequest.sendJSON();    	
+   			} 
+   			
+   			
+   		}	 
+   		
+   		//登录  
+   	/* 	function login(){
+   			
+   			 var userName= $("#userName").val();
+   			var passWord=$("#userPassword").val();
+   			
+   		     if(userName==""||passWord==""||userName==null || passWord==null){
+   		    	 alert("请输入正确的用户名或者密码 ");
+   		    	 return false;
+   		     };
+   	
+   		  $.ajax({
+   		    url:"user/login.ajax",    //请求的url地址
+   		    dataType:"json",   //返回格式为json
+   		    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+   		    data:{"userName":userName,
+   		    	   "userPassword":passWord
+   		    	},    //参数值
+   		    method : "post",   //请求方式
+   		    type:"POST",
+   		  
+   		    success:function(req){
+   		    	
+   		      if(req==0){
+   		    	  alert("管理员");
+   		    	 
+   		      }
+   		      else if(req==1){
+   		    	  alert("用户");
+   		      }
+   		      else{
+   		    	  alert("未知");
+   		      }
+   		    },
+   		   
+   		    error:function(){
+   		       alert("错误");
+   		    }
+   		});
+
+   			
+   		}; */
+   		
+   		//   1. 登录 获取用户输入的值 判断值是否为空  
+   		//   2. 当用户输入不为空  用ajax请求后台
+   		//   3. 根据后台请求的结果 判断用户名密码是否正确
+   		
+   		 /* function login(){
+   			var name=$("#userName").val();
+   			var passWord=$("#userPassword").val();
+   			if(name==""||name==null||passWord==""||passWord==null){
+   				alert("请输入正确的用户名和密码");
+   				return false;
+   			};
+   			$.ajax({
+   			    url:"user/login.ajax",    //请求的url地址
+   			    dataType:"json",   //返回格式为json
+   			    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+   			    data:{"userName":name,
+   			    	"userPassword":passWord
+   			    	},    //参数值
+   			    type:"POST",   //请求方式
+   			   
+   			    success:function(req){
+   			        //请求成功时处理
+   			        if(req==0){
+   			        	alert("管理员");
+   			        }
+   			        else if(req==1){
+   			        	alert("用户");
+   			        }
+   			        else{
+   			        	alert("未知");
+   			        }
+   			    },
+   			    
+   			    error:function(){
+   			        //请求出错处理
+   			        alert("请求错误");
+   			        return false;
+   			    }
+   			});
+   			
+   		};  */
+       
+   		//普通用户注册 
+   	function register(){
+   		window.location.href = "signup.shtml";
+   	}
+   	
+   		$("#reset1").click(function() {
+   			 alert(1);
+			$("#slider1").slider("restore");
+		});
+   		
+   		
+   		function changePassWord(){
+   			
+   			window.location.href = "getEmail.shtml";
+   		}
+	</script>
+ 
+
+</head>
+<body>
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<!-- <a href="index.html"  class="active">登录</a><a href="signup.html">注册</a> -->
+</div>
+<h1>图书借阅管理系统</h1>
+<div class="main-agileits">
+<!--form-stars-here-->
+   <input type="hidden" id="isCheck"/>
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">登录</h2>
+			<form action="#" method="post"  id="from-user-login" class="from-user-login">
+					<input type="text" id="userName" name="userName" placeholder="用户" nullableError="用户名不能为空" MaxLength=50/>
+					<input type="password" id="userPassword" name="userPassword" placeholder="密码" nullableError="密码不能为空"  MaxLength=50/>
+					<!-- <a href="#" class="forgot-w3layouts">忘记密码 ?</a> -->
+					
+					<div id="slider1" class="slider submit-w3l"></div> <span id="tip_span"></span>
+					
+				<div class="submit-w3l">
+					<input type="button" id="btn-login" value="登录" onclick="login();">
+				</div>
+				<p class="p-bottom-w3ls"><a href="javascript:void(0);" onclick="register();">点击注册</a>如果你没有一个帐户 <a style="margin-left:200px" onclick="changePassWord();" href="javascript:void(0);"> 忘记密码</a>
+			</form>
+			
+		</div>
+		</div>
+<!--//form-ends-here-->
+
+<!-- copyright -->
+	<div class="copyright w3-agile">
+		<p> © 2017</p>
+	</div>
+	<!-- //copyright --> 
+<!-- <script type="text/javascript" src="js/loginjs/jquery-2.1.4.min.js"></script> -->
+	
+	
+
+</body>
+</html>

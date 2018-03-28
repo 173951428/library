@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>公告列表</title>
+		<link rel="stylesheet" type="text/css" href="css/qian/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/qian/swiper-3.4.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/qian/libraryPublic.css"/>
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.html" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.html" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.html" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryBack.html" id="libraryBack">归还续借</a>
+					</li>
+					<li>
+						<a href="libraryList.html" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.html" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="w">
+			<img src="images/qian/banner.jpg" />
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.html">首页</a>→图书馆公告</span>
+			</div>
+		</div>
+		<!--公告内容-->
+		<div class="w public-info">
+			<p class="public-p2">图书馆公告</p>
+
+			<div class="mt-20 public-info-box">
+					<ul id="pagingShowContainer"  class="public-info-ul clearfix text-c">
+						
+					</ul>
+		
+				 <table style="margin-top: 10px;margin-left: 5px">
+					<tr>
+						<td align="left" id="countContainer">总 0 条  每页5 条  共 1 页</td>
+						<td align="right" id="pagingIndexContainer" style="padding-left: 180px;"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!--底部区域-->
+		<div class="down">
+			<div class="down-tel w">
+				<p>图书馆地址：河北省石家庄市新乐市空港工业园区无繁路69号</p>
+				<p>联系方式：0311-888888888</p>
+				<p>版权信息：Copyright © 图书馆</p>
+				<p>技术支持:李素杰</p>
+			</div>
+		</div>
+		</body>
+		
+		
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+         <script type="text/javascript" src="js/jquery.params.js" ></script>
+       
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		
+        
+        	<script id="pageTemplate" type="text/html">
+           
+			{{# for(var i = 0, len = d.pageList.length; i < len; i++){ }}
+         
+			<li>
+             <a href="javascript:void(0)" onclick="showNotice( {{d.pageList[i].id}})">  {{ d.pageList[i].title}}</a>
+             <span>发布时间:{{ d.pageList[i].publicTime}}</span>
+  			</li>
+			
+         
+			{{# } }}
+          
+		</script>
+         
+        
+       
+        <script type="text/javascript">
+        $(function(){
+        	initPage();
+        })
+        
+        function initPage(){
+        	
+        	 var pgObj = new Object();
+			 pgObj.sqlStatement = "mapper.NoticeMapper.queryAllqianByPage";
+			 pgObj.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+			 pgObj.showContainer="pagingShowContainer"; //指定查询哪个表格 
+			 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+			 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+			 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+			 ZcefUtils.pagingQuery(pgObj);
+        }
+        
+        
+        function showNotice(id){
+        	location.href="noticeInfo.shtml?id="+id;
+        }
+            
+        </script>
+	
+</html>

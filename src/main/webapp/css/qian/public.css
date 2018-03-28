@@ -1,0 +1,96 @@
+*,
+::before,
+::after {
+	margin: 0;
+	padding: 0;
+	/* 鏈夌殑鎵嬫満 娌℃湁鏀瑰瓧浣� */
+	font-family: "microsoft yahei", "simhei", "sans-serif";
+	/* 娓呴櫎榛樿鐨� 鐐瑰嚮楂樹寒鏁堟灉 */
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color: transparent;
+	/* 璁╁厓绱� 浼樺厛鑰冭檻 鑷繁鐨勫尯鍩熷ぇ灏� */
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+i,
+em {
+	font-style: normal
+}
+
+.w{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+input,button,select {
+	border: none;
+	outline: none;
+	/* 杩樻湁涓�涓� 绉诲姩绔� 涓撴湁鐨刬nput澶栬 */
+	/*寰堝叧閿細灏嗛粯璁ょ殑select閫夋嫨妗嗘牱寮忔竻闄�*/
+	-moz-appearance:none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+select{
+	/*鍦ㄩ�夋嫨妗嗙殑鏈�鍙充晶涓棿鏄剧ず灏忕澶村浘鐗�*/
+  background: url(../../images/qian/arrow.png)no-repeat scroll right center transparent;
+  /*涓轰笅鎷夊皬绠ご鐣欏嚭涓�鐐逛綅缃紝閬垮厤琚枃瀛楄鐩�*/
+  padding-right: 14px;
+}
+select::-ms-expand { display: none; }*/
+.br0 {
+	border-right: 0 !important;
+}
+
+.bb0 {
+	border-bottom: 0 !important;
+}
+
+.mr0 {
+	margin-right: 0 !important;
+}
+
+
+/* 宸﹀彸娴姩 */
+
+.f_l {
+	float: left;
+}
+
+.f_r {
+	float: right;
+}
+
+.clearfix::before,
+.clearfix::after {
+	content: '';
+	display: block;
+	visibility: hidden;
+	clear: both;
+	line-height: 0;
+	height: 0;
+}

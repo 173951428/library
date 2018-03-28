@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>图书管理系统登录页面</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+	<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+	<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+	<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+	<script type="text/javascript" src="js/H-ui.js"></script> 
+	<script type="text/javascript" src="js/H-ui.admin.js"></script>
+	<script type="text/javascript" src="js/json2.js" ></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/mask.js"></script>
+    <script type="text/javascript" src="js/httpRequest.js" ></script>
+    <script type="text/javascript" src="js/zcefUtils.js" ></script>
+    
+     <script type="text/javascript">
+    	//登录案件增加回车事件 
+	    document.onkeydown = function () { 
+			var theEvent = window.event; 
+			var code = theEvent.keyCode; 
+			if (code == 13) { 
+			$("#btn-login").click(); 
+			} 
+		} 
+   		$(function(){
+   			$("#btn-login").click(function(){
+   			     var name=document.getElementById("userName").value;
+   			   
+   			     var password=document.getElementById("userPassword").value; 
+   			     if(name==""||password==""){
+   			    	layer.alert("用户名或密码不能为空!",{icon:5,title:'错误提示'}) 
+   			    	return false;
+   			     }else{
+					var paramSave = ZcefUtils.obtainValues("from-user-login");  
+					var httpRequest = new HTTPRequest({
+						url : "user/login.ajax",
+						data : paramSave,  //获取表单的参数 
+						successFunc : function (data) {
+							if(data==0){
+							 	sessionStorage.setItem("name",name);
+								window.location.href = "index.shtml";	//这是 管理员登录的首页 
+							}else if(data==1){
+								sessionStorage.setItem("name",name);
+								window.location.href = "indexUser.shtml";	//这是 用户 登录的首页 
+							}else{
+								layer.alert("用户名或密码不正确!",{icon:5,title:'错误提示'}) 
+							} 						
+				        }					   
+					});
+   			}
+			        httpRequest.sendJSON();    						
+   			});
+   			
+   		});
+   		//普通用户注册 
+   	function register(){
+   		window.location.href = "register.shtml";
+   	}
+	</script>
+</head>
+
+<body>
+<div class="head">
+  <p>
+    <!-- <span class="note"></span>
+    <span><img src="images/icon_file.png"></span> -->
+    <span class="name" style="margin-left:25px; margin-top: -50px; font-size:50px">图书管理系统</span>
+    <div style="margin-top:0px; margin-right:20px; color:#1abb9c; font-size:20px; margin-left: 921px;">@author:小素素</div>
+ </p>
+</div>
+<div class="login-box">
+<form action="" method="post" id="from-user-login" class="from-user-login">
+  <ul>
+    <li>
+      <span class="icon-login"></span>
+      <input type="text" class="login-input" placeholder="请输入姓名" id="userName" name="userName" />
+    </li>
+    <li>
+      <span class="icon-loginpw"></span>
+      <input type="password" class="login-input" placeholder="请输入密码" id="userPassword" name="userPassword" />
+    </li>
+    <li><button type="button" class="btn-login" id="btn-login">登&nbsp;&nbsp;录</button></li>
+    
+     <li><button type="button" class="btn-login" id="btn-login" onclick="register()">用&nbsp;&nbsp;户&nbsp;&nbsp;注&nbsp;&nbsp;册</button></li>
+  </ul> 
+  </form>
+</div>
+</body>
+</html>

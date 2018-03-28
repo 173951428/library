@@ -1,0 +1,327 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+	 
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link href="css/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css">
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+		<title>公告管理</title>
+		<style type="text/css">
+		    .text-c{
+				 margin-left:100px;
+   				 margin-top: 20px;
+   				 }
+   				 
+   		   	.text-c th{
+   		   	  text-align:right;
+   		   	}
+   		   	.text-c td button{
+   		   	float: left;
+   		   	margin-left:40px;
+   		   	}	
+   		   	.text-c td input{
+   		   	width:100%;
+   		   	float:left;
+   		   	} 
+   		   	.text-w td{
+   		   	overflow:hidden;width:200px;white-space:nowrap;text-overflow:ellipsis;
+   		   	}
+   		   
+	  </style>
+	</head>
+	<!-- <style>
+	.mt-20 table{
+	margin-left: 25px;
+    margin-top: 20px;
+	}
+	</style> -->
+	<body>
+	<div class="breadcrumb">
+		<i class="Hui-iconfont"><img src="images/icon_subnav.png" /></i> 首页 
+		<span class="c-gray en">&gt;</span>操作
+		<span class="c-gray en">&gt;</span>公告
+		<a class="r mr-20 btn_sx" style="line-height:2.3em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+		  <i class="Hui-iconfont"><img src="images/icon_sx.png" /></i>
+		</a>
+	</div>
+	
+	
+	<!-- 条件查找的div start -->
+	 <div class="text-c top-searchbox2" id="searchform">  
+           <table border="0" cellpadding="0" cellspacing="0" class="top_sbox">
+             <tr>
+               
+                <th style="width:80px;"> 标题：</th>
+                <td style="width:200px;">
+               				 <input type="text"   placeholder="" id="title" name="title"  class="input-text m_r10"/>
+                </td>
+               
+               
+               
+               <th style="width:80px;">发布日期：</th>
+               <td style="width:150px;">
+                   	<input  class="input-text m_r10"  name="publicTime" id="publicTime" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',readOnly:true})" />
+               </td>
+
+               <td><button name="btnSearch" id="btnSearch" class="btn btn-success btn-radius" type="button" onClick="search();">查询</button></td>
+             </tr>
+           </table>
+       </div>		   
+	  	
+	<!-- 条件查找的div end -->
+	
+	
+	<div id="divCenter" style="margin-top:10px" >	  
+		 <div class="pd-20">
+			<input type="hidden" id="id" name="id">
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+				<span class="l" style="margin-right:5px;">
+					<button class="btn btn-primary radius" id="addBase" onclick="myUserAdd()" href="javascript:;">
+						<i class="Hui-iconfont">&#xe600;</i> 添加公告
+					</button>					
+				</span>	   
+			</div>
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-bg table-hover table-sort" style="table-layout: fixed;">
+					<thead>
+						<tr class="text-c">
+						    <th width="80px">标题</th>
+							<th width="120px">内容</th>
+							<th width="80px">发布时期</th>
+							<th width="80px">是否已发布</th>
+							<th width="80px">发布人</th>
+							<th width="80px">操作</th>
+						</tr>
+					</thead>
+					<tbody id="pagingShowContainer">
+						
+					</tbody>
+				</table>
+				
+				 <table style="margin-top: 10px;margin-left: 5px">
+					<tr>
+						<td align="left" id="countContainer">总 0 条  每页5 条  共 1 页</td>
+						<td align="right" id="pagingIndexContainer"></td>
+					</tr>
+				</table>
+			</div>
+			
+		
+		</div>
+         
+		
+		</div>
+		</body>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		
+		<!-- 第一步：编写模版。你可以使用一个script标签存放模板，如： -->
+		<script id="pageTemplate" type="text/html">
+			{{# for(var i = 0, len = d.pageList.length; i < len; i++){ }}
+			<tr class="text-c text-w">
+				<td>{{ d.pageList[i].title}}</td>
+				<td>{{ d.pageList[i].details}}</td>
+                <td>{{ d.pageList[i].publicTime}}</td>
+ 				<td>{{ d.pageList[i].isPublic=="0"?"未发布":"已发布"}}</td>
+				<td>{{ d.pageList[i].userName}}</td>
+				<td class="td-manage">
+					  {{#if( d.pageList[i].isPublic==0   ){ }}
+  							  
+					         <a title="发布" href="javascript:;" onclick="NoticePublic('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/play16x16.png"></u></i></a>
+					  {{# } }} 
+ 
+
+                      {{#if( d.pageList[i].isPublic==1   ){ }}
+  							  
+					         <a title="取消发布" href="javascript:;" onclick="CancelPublic('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/stop16x16.png"></u></i></a>
+					        
+					  {{# } }} 
+
+  					    <a title="修改" href="javascript:;" onclick="NoticeEdit('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/edit16x16.png"></u></i></a>
+					    <a title="删除" href="javascript:;" onclick="NoticeDeleteById('{{ d.pageList[i].id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/delete16x16.png"></u></i></a>
+
+				</td>
+			</tr>
+			{{# } }}
+		</script>
+		
+		<!-- 第三步：渲染模版 -->
+ 		<script type="text/javascript">
+		
+		    
+		
+			 function paging(){
+				 var pgObj = new Object();
+				 pgObj.sqlStatement = "mapper.NoticeMapper.queryAllByPage";
+				 pgObj.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+				 pgObj.showContainer="pagingShowContainer"; //指定查询哪个表格 
+				 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+				 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+				 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+				 ZcefUtils.pagingQuery(pgObj);
+				 
+			}
+			 
+			 
+			$(function(){
+				paging();
+			}); 
+			
+	
+			//模糊查询
+		     function search(){
+		    	 var title=$("#title").val();
+		    	  
+		    	 var publicTime=$("#publicTime").val();
+		    	 
+		    	 if((title!=""&&title!=null)||(publicTime!=""&&publicTime!=null)){
+		    		 
+		    		 $("#searchform").find("#title").val(title);
+		    		 $("#searchform").find("#publicTime").val(publicTime);
+		    		 
+		    		 var pgObjSearch = new Object();
+	        		 
+	        		 pgObjSearch.sqlStatement = "mapper.NoticeMapper.queryAllSearchByPage";
+	        		 pgObjSearch.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+					 
+	        		 pgObjSearch.paramContainer = "searchform";// 指定查询参数  ..
+					 
+	        		 pgObjSearch.showContainer="pagingShowContainer"; //指定查询哪个表格 
+					 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+					 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+					 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+					 ZcefUtils.pagingQuery(pgObjSearch);
+		    		 
+		    	 }else{
+		    		 
+		    		 paging();
+		    	 }
+		     }
+		   	
+			//增加用户的页面 
+			function myUserAdd(){
+				$("#id").val("");
+				ZcefUtils.openUpdateLayer({
+					title:'添加用户 ',
+					url:'NoticeEdit.shtml',
+					wigth:"500",
+					height:"300",
+					openAfterFunc:function(layero, index){
+				    },
+				  
+				   closeFunc:paging//添加完成后，再次刷新查询页面，这里传入的回调函数是分页函数
+				});
+			}
+			
+			
+			 //修改
+			function NoticeEdit(id){
+				$("#id").val(id);
+				ZcefUtils.openUpdateLayer({
+					title:'公告修改',
+					url:'NoticeEdit.shtml',
+					wigth:"500",
+					height:"300",
+					openAfterFunc:function(layero, index){
+						
+				    },
+					closeFunc:paging//添加完成后，再次刷新查询页面，这里传入的回调函数是分页函数
+				});
+			}
+			
+			//删除
+			function NoticeDeleteById(id){  
+				  if(id!= null && id !=""){
+						ZcefUtils.confirmLayerWithResult({
+							url:"notice/deleteById.ajax",
+							tipsMessage:"是否确定删除此公告?",
+								param:{id:id},
+								afterFunc:function (result){
+									if(result==1){
+										layer.msg('删除成功！', {
+										    icon: 1,
+										    time: 1000
+										}, function(){
+											paging();
+										}); 
+									}
+								} 
+								
+							});	
+					}
+			} 
+		
+	      //发布按钮
+	       function NoticePublic(id){
+			  if(id!= null && id !=""){
+					ZcefUtils.confirmLayerWithResult({
+						url:"notice/noticePublic.ajax",
+						tipsMessage:"是否确定发布此公告?",
+							param:{id:id},
+							afterFunc:function (result){
+								if(result==1){
+									layer.msg('发布成功！', {
+									    icon: 1,
+									    time: 1000
+									}, function(){
+										paging();
+									}); 
+								}
+							} 
+							
+						});	
+				}
+	    
+		  
+	  }	
+	   
+	   
+	     //取消发布
+	   function CancelPublic(id){
+		 if(id!= null && id !=""){
+				ZcefUtils.confirmLayerWithResult({
+					url:"notice/cancelPublic.ajax",
+					tipsMessage:"是否取消发布此公告?",
+						param:{id:id},
+						afterFunc:function (result){
+							if(result==1){
+								layer.msg('取消成功！', {
+								    icon: 1,
+								    time: 1000
+								}, function(){
+									paging();
+								}); 
+							}
+						} 
+						
+					});	
+			}
+ 
+	   }
+			
+		</script>
+</html>

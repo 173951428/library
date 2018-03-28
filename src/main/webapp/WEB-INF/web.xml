@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>Archetype Created Web Application</display-name>
+	<!-- Spring和mybatis的配置文件 -->
+	<context-param>  <!-- context-param这个节点,,可以直接加载自己配置的配置文件,注意别写多个同名字的节点,这是大坑 -->
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		    classpath:springmvc-mybatis.xml
+		   <!--  classpath:cxf-webservice.xml -->
+		</param-value>	
+	</context-param>
+	
+	
+	  <context-param>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>classpath:logback.xml</param-value> 
+	 </context-param>
+	<!-- spring的过滤器 filter,用于过滤请求,比如请求的参数等-->
+	<filter>  
+    <filter-name>encodingFilter</filter-name>  
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+    <init-param>  
+        <param-name>encoding</param-name>  
+        <param-value>UTF-8</param-value>  
+    </init-param>  
+    <init-param>  
+        <param-name>forceEncoding</param-name>  
+        <param-value>true</param-value>  
+    </init-param>  
+</filter> 
+	<filter-mapping> <!-- 过滤器的配置,拦截所有的/*配置,所有的/*请求都经过编码过滤器. 
+
+-->
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.ajax</url-pattern>
+	</filter-mapping>
+	<!-- Spring监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	 <listener>
+        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+    </listener>
+	
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- Spring MVC servlet,springmvc的拦截器,可以用来配置拦截的请求. -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<!-- 凡是加了 servlet-mapping,都会走加@Controller的注解 -->
+	 <!-- 配置Spring拦截器,项目中如果有*.ajax格式的请求,一般都是例如user/checkUser.ajax,
+	      这样,项目就会去寻找有两层注解的Controller类,如果是只有类似login.shtm的请求,就会去找只有一层注解的controller
+	     类的   ,即变成了页面跳转
+	  -->
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 ,拦截所有带"/"的请求-->
+		<url-pattern>*.ajax</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>*.shtml</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	 <!-- CXF的配置 --> 
+	<!--  <servlet>    
+        <servlet-name>CXFServlet</servlet-name>    
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>    
+        <load-on-startup>2</load-on-startup>    
+   	 </servlet> 
+    <servlet-mapping>    
+        <servlet-name>CXFServlet</servlet-name>    
+        <url-pattern>/webservice/*</url-pattern>    
+    </servlet-mapping>    -->
+	
+	   <!-- <servlet>可以配置让项目启动就自己后台加载哪个类的功能,比如此功能可以做后台定时任务等 -->
+	<!--  <servlet>
+	<servlet-name>QuartzServlet</servlet-name>
+		 <servlet-class>com.zhaoxinping.springmvc.quartz.QuartzServlet</servlet-class> 
+		<load-on-startup>2</load-on-startup>
+	</servlet>  -->
+	
+	<welcome-file-list>
+		<welcome-file>login.html</welcome-file>
+	</welcome-file-list>
+	<!-- 配置SESSION超时，单位是分钟 -->
+	<!-- <session-config>
+		<session-timeout>40</session-timeout>
+	</session-config> -->
+
+</web-app>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>主页</title>
+		<link rel="stylesheet" type="text/css" href="css/qian/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/qian/swiper-3.4.2.min.css" />
+	</head>
+
+	<body>
+		<!--顶部导航栏-->
+		<div class="nav-top">
+			<div class="nav-top-box">
+				<form class="search-box-inp">
+					<select class="search-box-timing">
+						<option value="1">书名</option>
+						<option value="2">作者</option>
+						<option value="3">类型</option>
+					</select>
+					<input type="text" class="search-inp" id="" value="" />
+					<button class="search-button">搜索</button>
+				</form>
+			</div>
+		</div>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.html" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.html" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.html" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryBack.html" id="libraryBack">归还续借</a>
+					</li>
+					<li>
+						<a href="libraryList.html" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.html" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="banner clearfix swiper-container">
+			<div class="banner-list swiper-wrapper">
+				<div class="banner-img swiper-slide">
+					<img src="images/qian/banner2.jpg" />
+				</div>
+				<div class="banner-img swiper-slide">
+					<img src="images/qian//banner3.jpg" />
+				</div>
+				<div class="banner-img swiper-slide">
+					<img src="images/qian/banner4.jpg" />
+				</div>
+				<div class="banner-img swiper-slide">
+					<img src="images/qian/banner5.jpg" />
+				</div>
+			</div>
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.html">首页</a></span>
+			</div>
+		</div>
+		<!--内容区域-->
+		<div class="content w clearfix">
+			<div class="content-left">
+				<!--图书公告-->
+				<div class="content-title">
+					<span class="sp">图书馆公告</span>
+					<div class="more">
+						<img src="images/qian/more.png" />
+						<a href="libraryPublic.shtml">更多&nbsp;&nbsp;></a>
+					</div>
+				</div>
+				<div class="public">
+					<div class="public-p1 clearfix" id="noticeShow">
+						
+
+					</div>
+				</div>
+				<!--图书分类-->
+				<div class="content-title">
+					<span class="sp">图书分类</span>
+					<div class="more">
+						<img src="images/qian/more.png" />
+						<a href="">更多&nbsp;&nbsp;></a>
+					</div>
+				</div>
+				<div class="ul">
+					<ul class="UL1">
+						<li>
+							<a href="">文学类</a>
+						</li>
+						<li>
+							<a href="">经济类</a>
+						</li>
+						<li>
+							<a href="">地理类</a>
+						</li>
+						<li>
+							<a href="">军事类</a>
+						</li>
+						<li>
+							<a href="">政治类</a>
+						</li>
+						<li>
+							<a href="">农业类</a>
+						</li>
+						<li>
+							<a href="">工业类</a>
+						</li>
+						<li>
+							<a href="">艺术类</a>
+						</li>
+
+					</ul>
+					<ul class="UL1">
+						<li>
+							<a href="">历史类</a>
+						</li>
+						<li>
+							<a href="">科学类</a>
+						</li>
+						<li>
+							<a href="">医学类</a>
+						</li>
+						<li>
+							<a href="">哲学类</a>
+						</li>
+						<li>
+							<a href="">教育类</a>
+						</li>
+						<li>
+							<a href="">语言类</a>
+						</li>
+						<li>
+							<a href="">生物类</a>
+						</li>
+						<li>
+							<a href="">综合类</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="content-right">
+				<!--图书推荐-->
+				<div class="content-title">
+					<span class="sp">新书推荐</span>
+					<div class="more">
+						<img src="images/qian/more.png" />
+						<a href="libraryNewbooks.html">更多&nbsp;&nbsp;></a>
+					</div>
+				</div>
+				<div class="newbook-ul clearfix">
+					<ul class="UL2" id="UL2">
+						<li><img src="images/qian/right-arrow.png" />
+							<a href="javascript:void(0);">白说</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">你的善良必须有点锋芒</a>
+						</li>
+						<li><img src="images/qian/right-arrow.png" />
+							<a href="javascript:void(0);">论语</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">深入理解计算机系统</a>
+						</li>
+						<li><img src="images/qian/right-arrow.png" />
+							<a href="javascript:void(0);">墨菲定律</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">百度推广</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">百度推广</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">百度推广</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">百度推广</a>
+						</li>
+						<li><img src="images/qian/right-arrow (1).png" />
+							<a href="javascript:void(0);">百度推广</a>
+						</li>
+					</ul>
+					<div id="pic-window">
+						<div class="pic-win1 clearfix">
+							<div class="pic-img">
+								<img src="images/qian/baidu.jpg" />
+							</div>
+							<!--表格-->
+							<table class="tab">
+								<tbody>
+									<tr>
+										<td class="td1">图书编号：</td>
+										<td class="td2">B-001</td>
+
+									</tr>
+									<tr>
+										<td class="td1">图书名：</td>
+										<td class="td2">《白说》</td>
+
+									</tr>
+									<tr>
+										<td class="td1">作者：</td>
+										<td class="td2">白岩松</td>
+									</tr>
+
+									<tr>
+										<td class="td1">出版社：</td>
+										<td class="td2">长江文艺出版社</td>
+									</tr>
+									<tr>
+										<td class="td1">数量：</td>
+										<td class="td2">32</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="pic-win1 yincang clearfix">
+							<div class="pic-img">
+								<img src="images/qian/baidu.jpg" />
+							</div>
+							<!--表格-->
+							<table class="tab">
+								<tbody>
+									<tr>
+										<td class="td1">图书编号：</td>
+										<td class="td2">B-001</td>
+
+									</tr>
+									<tr>
+										<td class="td1">图书名：</td>
+										<td class="td2">《白说》</td>
+
+									</tr>
+									<tr>
+										<td class="td1">作者：</td>
+										<td class="td2">白岩松</td>
+									</tr>
+
+									<tr>
+										<td class="td1">出版社：</td>
+										<td class="td2">长江文艺出版社</td>
+									</tr>
+									<tr>
+										<td class="td1">数量：</td>
+										<td class="td2">32</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="pic-win1 yincang clearfix">
+							<div class="pic-img">
+								<img src="images/qian/baidu.jpg" />
+							</div>
+							<!--表格-->
+							<table class="tab">
+								<tbody>
+									<tr>
+										<td class="td1">图书编号：</td>
+										<td class="td2">B-001</td>
+
+									</tr>
+									<tr>
+										<td class="td1">图书名：</td>
+										<td class="td2">《白说》</td>
+
+									</tr>
+									<tr>
+										<td class="td1">作者：</td>
+										<td class="td2">白岩松</td>
+									</tr>
+
+									<tr>
+										<td class="td1">出版社：</td>
+										<td class="td2">长江文艺出版社</td>
+									</tr>
+									<tr>
+										<td class="td1">数量：</td>
+										<td class="td2">32</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="pic-win1 yincang clearfix">
+							<div class="pic-img">
+								<img src="images/qian/baidu.jpg" />
+							</div>
+							<!--表格-->
+							<table class="tab">
+								<tbody>
+									<tr>
+										<td class="td1">图书编号：</td>
+										<td class="td2">B-001</td>
+
+									</tr>
+									<tr>
+										<td class="td1">图书名：</td>
+										<td class="td2">《白说》</td>
+
+									</tr>
+									<tr>
+										<td class="td1">作者：</td>
+										<td class="td2">白岩松</td>
+									</tr>
+
+									<tr>
+										<td class="td1">出版社：</td>
+										<td class="td2">长江文艺出版社</td>
+									</tr>
+									<tr>
+										<td class="td1">数量：</td>
+										<td class="td2">32</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+				<!--图书排行榜-->
+				<div class="content-title">
+					<span class="sp">图书排行榜</span>
+					<div class="more">
+						<img src="images/qian/more.png" />
+						<a href="libraryList.html">更多&nbsp;&nbsp;></a>
+					</div>
+				</div>
+				<div style="margin-top: 10px;">
+					<ul class="UL3" id="UL3" style="float: left;">
+						<li><img src="images/qian/crown.png" />
+							<a href="">白说</a>
+						</li>
+						<li><img src="images/qian/crown (1).png" />
+							<a href="">你的善良必须有点锋芒</a>
+						</li>
+						<li><img src="images/qian/crown (2).png" />
+							<a href="">论语</a>
+						</li>
+						<li><img src="images/qian/1.png" />
+							<a href="">深入理解计算机系统</a>
+						</li>
+						<li><img src="images/qian/2.png" />
+							<a href="">墨菲定律</a>
+						</li>
+						<li><img src="images/qian/3.png" />
+							<a href="">百度推广</a>
+						</li>
+					</ul>
+					<ul class="UL3" id="UL3" style="float: right;">
+						<li><img src="images/qian/4.png" />
+							<a href="">白说</a>
+						</li>
+						<li><img src="images/qian/5.png" />
+							<a href="">你的善良必须有点锋芒</a>
+						</li>
+						<li><img src="images/qian/6.png" />
+							<a href="">论语</a>
+						</li>
+						<li><img src="images/qian/7.png" />
+							<a href="">深入理解计算机系统</a>
+						</li>
+						<li><img src="images/qian/8.png" />
+							<a href="">墨菲定律</a>
+						</li>
+						<li><img src="images/qian/9.png" />
+							<a href="">百度推广</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="down">
+			<div class="down-tel w">
+				<p>图书馆地址：河北省石家庄市新乐市空港工业园区无繁路69号</p>
+				<p>联系方式：0311-888888888</p>
+				<p>版权信息：Copyright © 图书馆</p>
+				<p>技术支持:李素杰</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script src="js/swiper-3.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script> 
+		<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/form-validator.js"></script> 
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+        <script type="text/javascript" src="js/dictionary.js" ></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/jquery.params.js" ></script>
+       
+		<script>
+			var mySwiper = new Swiper('.swiper-container', {
+				autoplay: 5000, //可选选项，自动滑动
+				loop: true
+
+			})
+			//首页新书推荐切换
+			$("#UL2 li").click(function() { /*----------------选项卡的点击事件，移动端用tap-----------------*/
+				var index = $(this).index(); /*定义索引数值*/
+				$("#pic-window>div").eq(index).css("display", "block").siblings().css("display", "none"); /*相对应的第几个内容区显示，其他的隐藏*/
+			});
+
+			//悬浮导航栏
+			$(function() {
+				var nav = $(".nav-top"); //得到导航对象
+				var win = $(window); //得到窗口对象
+				var sc = $(document); //得到document文档对象。
+				win.scroll(function() {
+					if(sc.scrollTop() >= 100) {
+       					nav.addClass("fixednav");
+						$(".nav-top").fadeIn(1000);
+					} else {
+//						nav.removeClass("fixednav");
+						$(".nav-top").fadeOut(1000);
+					}
+				})
+			})
+			
+		
+			
+			$(function(){
+				// 显示公告
+				showNotice();
+			}); 
+			
+			function showNotice(){
+				var httpRequest = new HTTPRequest({
+					url : "notice/showNotice.ajax",
+					successFunc : function (data) {	
+						$.each(data, function(i,n) {
+ 						   $("#noticeShow").append('<p onclick="showNoticeById('+n.id+')"><span class="public-sp1">'+n.title+'</span><span class="public-sp2">'+n.publicTime+'</span></p>');
+                        });
+	
+					  }
+				});
+			
+				httpRequest.sendJSON();
+			}
+			
+			 function showNoticeById(id){
+				 location.href="noticeInfo.shtml?id="+id;
+			 }
+		</script>
+	</body>
+
+</html>
