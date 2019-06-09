@@ -6,15 +6,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.library.system.entity.BookManageEntity;
+import com.library.system.entity.BookStatus;
 import com.library.system.entity.BooksTypeEntity;
+import com.library.system.service.IBookStatus;
 import com.library.system.service.IBooksService;
 import com.library.system.service.IBooksTypeServer;
 
@@ -28,12 +36,83 @@ public class BooksController {
 	@Autowired
 	IBooksTypeServer booksTypeServer;
     
+	@Autowired
+	IBookStatus bookStatus;
+	
+	//查询图书类型
 	@RequestMapping(value="selectAllBooksType")
 	@ResponseBody
 	public List<BooksTypeEntity> selectAllBooksType(){	 
 		  List<BooksTypeEntity> booksList=booksTypeServer.selectAll();
 		  return booksList;
 	}
+	
+	//查询图书状态
+     @RequestMapping(value="selectAllBooksStautus")
+     @ResponseBody
+	public List<BookStatus> selectAllStatus(){
+		  return  bookStatus.selectAll();
+	  }
+	 
+	@RequestMapping(value="selectBooksTypeById")
+	@ResponseBody
+	public String selectBooksTypeById(@RequestBody Map<Object, Object> param){	 
+		Integer id=Integer.valueOf(param.get("id").toString()) ;
+		  return booksTypeServer.selectById(id);
+		
+	}
+	
+	
+	//新书推荐,查询新书前10条
+	@RequestMapping(value="NewbooksRecommendation")
+	@ResponseBody
+	public List<Map<String, Object>> NewbooksRecommendation(){	 
+		  List<Map<String, Object>> booksList=bookServer.selectNewTopSeven();
+		  return booksList;
+	}
+	
+	
+	//根据借阅次数,现实前8个图书
+		@RequestMapping(value="selectToEight")
+		@ResponseBody
+		public List<Map<String, Object>> selectToEight(){	 
+			  List<Map<String, Object>> booksList=bookServer.selectToEight();
+			  return booksList;
+		}
+	
+	//根据id查询图书
+	@RequestMapping(value="/selectById",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> selectBookById(@RequestBody Map<Object, Object> param){
+	
+		Integer id=Integer.valueOf(param.get("id").toString()) ;
+		return bookServer.selectById(id);
+		
+	}
+	//增加或者修改
+	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public Integer insertOrUpdateBook(@RequestBody  BookManageEntity bookManageEntity){	 
+		   return bookServer.saveOrUpdate(bookManageEntity);
+		  
+	}
+	
+
+	
+	//根据id删除
+		@RequestMapping(value = "/deleteById", method = RequestMethod.POST)
+		@ResponseBody
+		public Integer deleteById(@RequestBody Map<String, Object> param,HttpServletRequest request){	 
+			Integer id=Integer.valueOf((String) param.get("id")) ;
+			//删除书籍的时候,同时需要删除服务器对应的书籍图片
+			Map<String, Object> result=bookServer.selectById(id);
+			// 获取要删除图片的服务器完整保存路径
+			String path=  request.getSession().getServletContext().getRealPath("/")+(String) result.get("bookImgUrl");
+			 this.deleteFile(path);
+			 return  bookServer.deleteById(id);
+			
+			  
+		}
 	//上传封面图,返回map集合
 	@RequestMapping(value="uploadImg")
 	@ResponseBody
@@ -68,7 +147,7 @@ public class BooksController {
 	
 	
 	 /** 
-     * @author zhaoxinping
+     * @author lisujie
     * 删除单个文件 
     * @param   sPath    被删除文件的文件名 
     * @return 单个文件删除成功返回true，否则返回false 
@@ -92,7 +171,7 @@ public class BooksController {
     *            要上传的文件
     * @param fileUrl
     *            文件上传路径
-    * @author zhaoxinping           
+    * @author lisujie           
     */
    public String uploadFile(MultipartFile[] files, String imageUrl) {
       
@@ -131,5 +210,7 @@ public class BooksController {
        }
        return imageName;
    }
+   
+   
       
 }

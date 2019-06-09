@@ -5,11 +5,11 @@ textarea {
 	vertical-align: middle;
 }
 
-table,
+/* table,
 td,
 th {
 	border: 1px solid black;
-}
+} */
 
 .loan-search {
 	padding-top: 30px;
@@ -81,8 +81,6 @@ th {
 	display: block;
 	width: 150px;
 	height: 150px;
-	background: url(../images/qian/baishuo.jpg)no-repeat;
-	background-size:150px 150px;
 }
 .lend-title{
 	float: left;

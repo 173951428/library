@@ -58,6 +58,7 @@ public class UserController {
 		 HttpSession session = request.getSession();
 		if(null!=checkUser){
 			session.setAttribute("userId",checkUser.getId());
+			session.setAttribute("checkUser",checkUser);
 			  if(checkUser.getLevel()==0){
 				  result=0;
 			  }else if(checkUser.getLevel()==1){
@@ -91,8 +92,17 @@ public class UserController {
 	}	
 	
 	
-
-	
+   /**
+    * 检查当前登录的对象
+    * @return
+    */
+	@ResponseBody
+	@RequestMapping(value = "/getLoginUser", method = RequestMethod.POST)
+	public MyUser getLoginUser(HttpServletRequest request){
+		MyUser user=(MyUser) request.getSession().getAttribute("checkUser");
+	   
+		return user;
+	}
 	
   /**
    * 增加或者修改用户

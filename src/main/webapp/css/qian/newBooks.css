@@ -41,12 +41,12 @@
 	color: #4f84b0;
 }
 .newBooks-box-right{
-	width: 700px;
+	width: 1000px;
 	height: 600px;
 	background-color: #e9f2f9;
 }
 .newBooks-tuijian{
-	width: 680px;
+	width: 1000px;
 	margin: 0 auto;
 	padding: 20px 0;
 	height: 580px;
@@ -60,7 +60,7 @@
 	
 }
 .newBooks-tab>tbody>tr>td{
-	width: 110px;
+	width: 150px;
     height: 40px;
     border-bottom: 1px solid #ddd;
     

@@ -15,5 +15,9 @@ public class BooksTypeServerImp implements IBooksTypeServer {
 	public List<BooksTypeEntity> selectAll() {		
 		return sqlClient.queryForList("mapper.BooksTypeMapper.selectAllType");
 	}
+	@Override
+	public String selectById(Integer id) {
+		  return  sqlClient.queryForObject("mapper.BooksTypeMapper.selectById",id);
+	}
 
 }

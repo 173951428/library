@@ -2,7 +2,7 @@ package com.library.system.entity;
 import java.util.List;
 /**
  * 分页的基类 
- * @author zhaoxinping
+ * @author lisujie
  *
  */
 public class PageEntity extends BaseEntity{

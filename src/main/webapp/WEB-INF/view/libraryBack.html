@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/qian/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/back.css"/>
+		
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.shtml" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.shtml" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.shtml" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryList.shtml" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.shtml" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="w">
+			<img src="images/qian/banner.jpg" />
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.shtml">首页</a>→续借归还</span>
+			</div>
+		</div>
+		<!--归还续借-->
+		<div class="w">
+			<div class="bookback-box">
+				<ul class="bookback-box-ul clearfix">
+					<li class="bookback-box-nav bookback-color1"><a href="javascript:void(0);">借阅未归还</a></li>
+					<li class="bookback-box-nav bookback-color2"><a href="javascript:void(0);">借阅已归还</a></li>
+					<li class="bookback-box-nav bookback-color3"><a href="javascript:void(0);">逾期未归还</a></li>
+					<li class="bookback-box-nav bookback-color4"><a href="javascript:void(0);">逾期已归还</a></li>
+				</ul>
+				<div class="borrow1 bookback-color1">
+					
+				</div>
+				<div class="borrow2 bookback-color2 yincang">
+					
+				</div>
+				<div class="outTime1 bookback-color3 yincang">
+					
+				</div>
+				<div class="outTime2 bookback-color4 yincang">
+					
+				</div>
+			</div>
+		</div>
+		<script src="lib/jquery/1.9.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".bookback-box-ul li").click(function(){
+				var index=$(this).index()
+				$(".bookback-box>div").eq(index).css("display","block").siblings("div").css("display","none");
+			});
+		</script>
+	</body>
+</html>

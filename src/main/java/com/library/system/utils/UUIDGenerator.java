@@ -3,7 +3,7 @@ import java.net.InetAddress;
 import java.util.UUID;
 /**
  * 主键生成
- * @author zhaoxinping
+ * @author 
  *
  */
 public final class UUIDGenerator {

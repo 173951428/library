@@ -57,7 +57,7 @@
                 <th style="width:80px;"> 图书编号：</th>
                 <td style="width:140px;"><input type="text"  value="" placeholder="" id="bookNo" name="bookNo"  class="input-text m_r10" onkeyup="this.value=this.value.replace(' ','')"/></td>
                
-               <th style="width:80px;"> 图书名字：</th>
+               <th style="width:80px;"> 图书名：</th>
                 <td style="width:140px;"><input type="text"  value="" placeholder="" id="bookName" name="bookName"  class="input-text m_r10" onkeyup="this.value=this.value.replace(' ','')"/></td>
                
                 
@@ -98,13 +98,15 @@
 						    <th width="80">图书编号</th>
 							<th width="80">书名</th>
 							<th width="80">作者</th>
+							<th width="80">出版社</th>
 							<th width="80">出版时间</th>
 							<th width="80">图书详情</th>
 							<th width="80">书架位置</th>
-							<th width="100">图书类型</th>
+							<th width="80">图书类型</th>
 							<th width="80">图片地址</th>
 							<th width="80">库存数量</th>
-							<th width="70">图书借阅数量</th>
+							<th width="80">图书借阅数量</th>
+							<th width="80">图书录入时间</th>
 							<th width="80">操作</th>
 						</tr>
 					</thead>
@@ -155,17 +157,18 @@
 				<td>{{ d.pageList[i].book_no}}</td>
                 <td>{{ d.pageList[i].book_name}}</td>
 				<td>{{ d.pageList[i].book_author}}</td>
+				<td>{{ d.pageList[i].publishing_house}}</td>
  				<td>{{ d.pageList[i].book_out_time}}</td>
 				<td>{{ d.pageList[i].book_infomation}}</td>
 				<td>{{ d.pageList[i].book_shelf}}</td>
 				<td>{{ d.pageList[i].type}}</td>
 				<td>{{ d.pageList[i].book_img_url}}</td>
 				<td>{{ d.pageList[i].book_count}}</td>
-				<td>{{ d.pageList[i].book_out_sum}}</td>
+				<td>{{ d.pageList[i].book_out_sum}}</td> 
+				<td>{{ d.pageList[i].book_int_time}}</td> 
 				<td class="td-manage">
-					<a title="修改" href="javascript:;" onclick="UserEdit('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/edit16x16.png"></u></i></a>
-					<a title="删除" href="javascript:;" onclick="UserDeleteById('{{ d.pageList[i].id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/delete16x16.png"></u></i></a>
-                   
+					<a title="修改" href="javascript:;" onclick="BookEdit('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/edit16x16.png"></u></i></a>
+					<a title="删除" href="javascript:;" onclick="BookDeleteById('{{ d.pageList[i].id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u><img src="images/delete16x16.png"></u></i></a>
 				</td>
 			</tr>
 			{{# } }}
@@ -173,9 +176,6 @@
 		
 		<!-- 第三步：渲染模版 -->
  		<script type="text/javascript">
-		
-		    
-		
 			 function paging(){
 				 var pgObj = new Object();
 				 pgObj.sqlStatement = "mapper.BooksMapper.queryAllByPage";
@@ -230,10 +230,8 @@
 					 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
 					 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
 					 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
-					 ZcefUtils.pagingQuery(pgObjSearch);
-		    		 
+					 ZcefUtils.pagingQuery(pgObjSearch); 
 		    	 }else{
-		    		 
 		    		 paging();
 		    	 }
 		     }
@@ -254,13 +252,12 @@
 			
 			
 			 //修改
-			function UserEdit(id){
+			function BookEdit(id){
 				$("#id").val(id);
 				ZcefUtils.openUpdateLayer({
-					title:'修改用户',
-					url:'MyUserEdit.shtml',
-					width:"500",
-					height:"300",
+					title:'修改图书',
+					url:'BooksEdit.shtml',
+					height:"550",
 					openAfterFunc:function(layero, index){
 						
 				    },
@@ -268,11 +265,11 @@
 				});
 			}
 			
-			
-			function UserDeleteById(id){  
+			 //删除书籍
+			function BookDeleteById(id){  
 				  if(id!= null && id !=""){
 						ZcefUtils.confirmLayerWithResult({
-							url:"user/deleteById.ajax",
+							url:"books/deleteById.ajax",
 							tipsMessage:"是否确定删除此条数据?",
 								param:{id:id},
 								afterFunc:function (result){
@@ -288,7 +285,10 @@
 								
 							});	
 					}
-			} 
+			}
+			
+		
+			
 			
 			
 			

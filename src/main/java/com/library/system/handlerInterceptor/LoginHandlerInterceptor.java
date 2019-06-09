@@ -11,7 +11,7 @@ import com.library.system.entity.MyUser;
 
 /*
  * 登录拦截器  
- * @author zhaoxinping
+ * @author lisujie
  *
  */
 public class LoginHandlerInterceptor implements HandlerInterceptor {

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.BooksBorrowMapper" >
+  <resultMap id="BaseResultMap" type="com.library.system.entity.BooksBorrow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_borrow_id" property="userBorrowId" jdbcType="VARCHAR" />
+    <result column="book_type_id" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="borrow_date" property="borrowDate" jdbcType="DATE" />
+     <result column="return_time" property="returnTime" jdbcType="DATE" />
+    <result column="book_status_id" property="bookStatusId" jdbcType="INTEGER" />
+  
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userBorrowId,bookId,borrowDate,returnTime,bookStatusId
+  </sql>
+  <select id="queryAllByPage" resultMap="BaseResultMap">
+      select 
+      <include refid="Base_Column_List" />
+      from books_borrow 
+  </select>
+  
+  <select id="querySearchByPage" resultType="map">
+    
+          SELECT 
+			  b.book_no bookNo,
+			  b.book_name bookName,
+			  bb.borrow_date borrowDate,
+			  bb.return_time returnTime,
+			  bs.status bookStatus,
+			  br.return_date_info returnDateInfo,
+			  bb.id id,
+			  bb.book_status_id bookStatusId
+          FROM
+		    books_borrow bb 
+        LEFT JOIN books b 
+		    ON bb.book_id = b.id 
+		  LEFT JOIN book_status  bs
+		    ON  bb.book_status_id=bs.id
+		  LEFT JOIN books_return br
+		    ON  bb.id=book_borrow_id
+      LEFT JOIN myuser ms ON bb.user_borrow_id=ms.id
+    WHERE 1=1
+     <if test="userId!=null and userId!=''" >
+       			 and  bb.user_borrow_id =#{userId}
+     </if>
+     
+     <if test="bookName!=null and bookName!=''" >
+       			 and  b.book_name  like  CONCAT('%',#{bookName},'%') 
+     </if>
+     
+     <if test="bookNo!=null and bookNo!=''" >
+       			 and  b.book_no like  CONCAT('%',#{bookNo},'%') 
+     </if>
+     
+     <if test="bookStatusId !=null and bookStatusId!=''" >
+       			 and  bb. book_status_id=#{bookStatusId}
+     </if>
+    
+    GROUP BY bb.id,br.id
+    ORDER BY bb.borrow_date DESC
+  </select>
+  
+  
+  
+ 
+
+  
+  <select id="selectByMap" resultType="map">
+      select * from books_borrow
+  </select>
+  <!-- 借书之前,先判断,该用户是否有大于10本以上,未归还的书籍 -->
+  <select id="selectCountByStatus" parameterType="String"  resultType="INTEGER">
+     SELECT  COUNT(*) FROM books_borrow  WHERE  user_borrow_id =#{id} AND book_status_id=1
+  </select>
+  
+  <!-- 根据Id查询 -->
+   <select id="queryById" resultMap="BaseResultMap" parameterType="INTEGER">
+    select 
+     *
+      from books_borrow where id=#{id}
+   </select>
+   
+   <insert id="insertBooksBorrow"  parameterType="com.library.system.entity.BooksBorrow" useGeneratedKeys="true" keyProperty="id">
+       insert into books_borrow
+       <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+      <if test="userBorrowId != null" >
+        user_borrow_id,
+      </if>
+      
+       <if test="bookTypeId != null" >
+        book_type_id,
+       </if>
+      
+       <if test="bookId != null" >
+        book_id,
+      </if>
+      
+       <if test="borrowDate != null" >
+        borrow_date,
+      </if>
+      
+      <if test="returnTime != null" >
+        return_time,
+      </if>
+     
+      
+       <if test="bookStatusId != null" >
+       book_status_id,
+       </if>
+      
+     </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+     
+      <if test="userBorrowId != null" >
+        #{userBorrowId},
+      </if>  
+      
+        <if test="bookTypeId != null" >
+        #{bookTypeId},
+      </if> 
+      
+      <if test="bookId != null" >
+        #{bookId},
+      </if>  
+      
+       <if test="borrowDate != null" >
+        #{borrowDate},
+      </if>  
+      
+       <if test="returnTime != null" >
+        #{returnTime},
+      </if>  
+      
+       <if test="bookStatusId != null" >
+        #{bookStatusId}
+      </if>  
+      
+      
+    </trim>
+   </insert>
+   
+   <update id="upateBooksBorrow" parameterType="string">
+       update books_borrow
+    <set >
+       <if test="userBorrowId != null" >
+        user_borrow_id = #{userBorrowId},
+      </if>
+      <if test="bookId != null" >
+        book_id = #{bookId},
+      </if> 
+      
+       <if test="borrowDate != null" >
+        borrow_date = #{borrowDate},
+      </if>
+      
+      <if test="returnTime != null" >
+        return_time = #{returnTime},
+      </if>
+      
+       <if test="bookStatusId != null" >
+         book_status_id = #{bookStatusId}
+      </if>
+
+    </set>
+    where id = #{id}
+   </update>
+   
+    <!-- 带条件的分页模糊查询 -->
+   <select id="queryAllSearchByPage" resultType="map" parameterType="map">
+     
+			SELECT 
+			  b.id AS id,
+			  bb.borrow_date,
+			  b.book_out_sum,
+			  bt.type,
+			  b.book_name ,
+			  b.book_author,
+			  b.publishing_house,
+			  b.book_count  
+			FROM
+			  books_borrow bb 
+			  LEFT JOIN books b 
+			    ON bb.book_id = b.id 
+			  LEFT JOIN book_type bt 
+			    ON bb.book_type_id = bt.id 
+			   
+			 WHERE DATE_SUB(CURDATE(), INTERVAL 60 DAY) &lt;= bb.borrow_date 
+			
+			 <if test="typeIdValue!=null and typeIdValue!=''" >
+       			 and   bb.book_type_id = #{typeIdValue} 
+       		</if>
+			
+			GROUP BY b.id
+			ORDER BY b.book_out_sum DESC 
+		
+   </select>
+   
+   
+   <!-- 这是管理员操作查找没归还图书的sql  -->
+    <select id="queryNeedReturnByPage" resultType="map">
+           
+       SELECT 
+              bb.id,
+			  bs.book_no bookNo,
+			  bs.book_name bookName,
+			  ms.username userName,
+			  bb.borrow_date borrowDate,
+			  bb.return_time returnTime,
+			
+			  bt.status  returnStatus
+       FROM
+			  books_borrow bb
+			  LEFT JOIN books bs 
+			    ON bb.book_id = bs.id 
+			  LEFT JOIN myuser ms 
+			    ON ms.id = bb.user_borrow_id 
+			  LEFT JOIN book_status bt
+			    ON bb.book_status_id = bt.id   
+			  
+         WHERE  bb.book_status_id IN(1,3,4)
+    
+    </select>
+    
+    
+     <!-- 这是管理员操作查找没归还图书的sql  -->
+     <select id="queryNeedReturnSearchByPage" resultType="map">
+               
+       SELECT 
+              bb.id,
+			  bs.book_no bookNo,
+			  bs.book_name bookName,
+			  ms.username userName,
+			  bb.borrow_date borrowDate,
+			  bb.return_time returnTime,
+			  bt.status  returnStatus
+       FROM
+			  books_borrow bb
+			  LEFT JOIN books bs 
+			    ON bb.book_id = bs.id 
+			  LEFT JOIN myuser ms 
+			    ON ms.id = bb.user_borrow_id 
+			  LEFT JOIN book_status bt
+			    ON bb.book_status_id = bt.id   
+			  
+         WHERE  bb.book_status_id IN(1,3,4)
+          <if test="userName!=null and userName!=''" >
+                 AND ms.username like CONCAT('%',#{userName},'%')   
+         </if>
+          <if test="bookName!=null and bookName!=''" >
+              AND bs.book_name like CONCAT('%',#{bookName},'%') 
+         </if>
+          
+       	<if test="bookNo!=null and bookNo !=''" >
+              AND bs.book_no like CONCAT('%',#{bookNo},'%') 
+         </if>
+     </select>
+   
+      <select id="selectReturnTime" parameterType="Integer" resultType="date">
+         select return_time from books_borrow where id=#{borrowId}
+      </select>
+      
+      <update id="updateBorrowStatusId" parameterType="map">
+          update books_borrow set book_status_id=#{bookStatusId} where id=#{id}
+      </update>
+</mapper>

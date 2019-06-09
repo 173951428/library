@@ -13,4 +13,8 @@
     select * from  book_type
   </select>
   
+  
+  <select id="selectById" resultType="String" parameterType="INTEGER">
+    select type from  book_type  where id=#{id}
+  </select>
 </mapper>

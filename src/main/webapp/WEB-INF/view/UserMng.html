@@ -160,9 +160,6 @@
 		
 		<!-- 第三步：渲染模版 -->
  		<script type="text/javascript">
-		
-		    
-		
 			 function paging(){
 				 var pgObj = new Object();
 				 pgObj.sqlStatement = "mapper.MyUserMapper.queryAllByPage";
@@ -178,9 +175,10 @@
 			 
 			$(function(){
 				paging();
+				
 			}); 
 			
-			
+	 
 			//模糊查询
 		     function search(){
 		    	 var userName=$("#userName").val();

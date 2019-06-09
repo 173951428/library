@@ -51,6 +51,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 
+
 	<!-- Spring MVC servlet,springmvc的拦截器,可以用来配置拦截的请求. -->
 	<servlet>
 		<servlet-name>SpringMVC</servlet-name>
@@ -92,12 +93,12 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     </servlet-mapping>    -->
 	
 	   <!-- <servlet>可以配置让项目启动就自己后台加载哪个类的功能,比如此功能可以做后台定时任务等 -->
-	<!--  <servlet>
+<!-- 	 <servlet>
 	<servlet-name>QuartzServlet</servlet-name>
-		 <servlet-class>com.zhaoxinping.springmvc.quartz.QuartzServlet</servlet-class> 
+		 <servlet-class>com.library.system.quartz.QuartzServlet</servlet-class> 
 		<load-on-startup>2</load-on-startup>
-	</servlet>  -->
-	
+	</servlet> 
+	 -->
 	<welcome-file-list>
 		<welcome-file>login.html</welcome-file>
 	</welcome-file-list>

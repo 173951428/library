@@ -1,6 +1,7 @@
 package com.library.system.entity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 图书管理实体类
@@ -10,9 +11,10 @@ import java.sql.Date;
 public class BookManageEntity {
 	
 	private Integer id;
-	private Integer bookNo;					//图书编号
+	private String bookNo;					//图书编号
 	private String  bookName;				// 书名
 	private String  bookAuthor;				//作者
+	private String  publishingHouse;        //出版社
 	private Date    bookOutTime;			// 出版时间
 	private String  bookInfomation;			//图书详情
 	private String  bookShelf;				//书架位置
@@ -20,16 +22,20 @@ public class BookManageEntity {
 	private Integer bookCount;				//库存数量
 	private String  bookImgUrl;				//书籍图片存放路径
 	private Integer bookOutSum;				//图书借阅总数
+	private Timestamp    bookIntTime;				// 图书录入本地系统的时间
+	
+	
+
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getBookNo() {
+	public String getBookNo() {
 		return bookNo;
 	}
-	public void setBookNo(Integer bookNo) {
+	public void setBookNo(String bookNo) {
 		this.bookNo = bookNo;
 	}
 	public String getBookName() {
@@ -86,5 +92,20 @@ public class BookManageEntity {
 	public void setBookShelf(String bookShelf) {
 		this.bookShelf = bookShelf;
 	}
+	public Timestamp getBookIntTime() {
+		return bookIntTime;
+	}
+	public void setBookIntTime(Timestamp bookIntTime) {
+		this.bookIntTime = bookIntTime;
+	}
+	public String getPublishingHouse() {
+		return publishingHouse;
+	}
+	public void setPublishingHouse(String publishingHouse) {
+		this.publishingHouse = publishingHouse;
+	}
+	
+	
+	
 
 }

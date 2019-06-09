@@ -7,4 +7,6 @@ import com.library.system.entity.BooksTypeEntity;
 public interface IBooksTypeServer {
 	
      public List<BooksTypeEntity> selectAll();
+     
+     public String selectById(Integer id);
 }

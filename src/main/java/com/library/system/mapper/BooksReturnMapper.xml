@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.BooksReturnMapper" >
+  <resultMap id="BaseResultMap" type="com.library.system.entity.BooksReturnEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_borrow_id" property="userBorrowId" jdbcType="VARCHAR" />
+    <result column="book_type_id" property="bookTypeId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="borrow_date" property="borrowDate" jdbcType="DATE" />
+    <result column="return_date_info" property="returnDateInfo" jdbcType="DATE" />
+    <result column="book_status_id" property="bookStatusId" jdbcType="INTEGER" />
+   <result column="book_borrow_id" property="bookBorrowId" jdbcType="INTEGER" />
+  </resultMap>
+
+   
+   
+    <insert id="insertBooksReturn"  parameterType="com.library.system.entity.BooksReturnEntity">
+       insert into books_return
+       <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+      <if test="userBorrowId != null" >
+        user_borrow_id,
+      </if>
+      
+       <if test="bookTypeId != null" >
+        book_type_id,
+       </if>
+      
+       <if test="bookId != null" >
+        book_id,
+      </if>
+      
+       <if test="borrowDate != null" >
+        borrow_date,
+      </if>
+      
+      <if test="returnDateInfo != null" >
+        return_date_info,
+      </if>
+     
+      
+       <if test="bookStatusId != null" >
+       book_status_id,
+       </if>
+      
+       <if test="bookBorrowId != null" >
+       book_borrow_id
+       </if>
+       
+     </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+     
+      <if test="userBorrowId != null" >
+        #{userBorrowId},
+      </if>  
+      
+        <if test="bookTypeId != null" >
+        #{bookTypeId},
+      </if> 
+      
+      <if test="bookId != null" >
+        #{bookId},
+      </if>  
+      
+       <if test="borrowDate != null" >
+        #{borrowDate},
+      </if>  
+      
+       <if test="returnDateInfo != null" >
+        #{returnDateInfo},
+      </if>  
+      
+       <if test="bookStatusId != null" >
+        #{bookStatusId},
+      </if>  
+      
+       <if test="bookBorrowId != null" >
+        #{bookBorrowId}
+      </if>  
+      
+
+    </trim>
+   </insert>
+   
+   
+   <update id="upateBooksReturn" parameterType="string">
+       update books_return
+    <set >
+       <if test="userBorrowId != null" >
+        user_borrow_id = #{userBorrowId},
+      </if>
+      <if test="bookTypeId != null" >
+        book_id = #{bookId},
+      </if> 
+      
+       <if test="bookId != null" >
+        book_id = #{bookId},
+      </if> 
+      
+       <if test="borrowDate != null" >
+        borrow_date = #{borrowDate},
+      </if>
+      
+      <if test="returnDateInfo != null" >
+        return_date_info = #{returnDateInfo},
+      </if>
+      
+       <if test="bookStatusId != null" >
+         book_status_id = #{bookStatusId}
+      </if>
+      
+      <if test="bookBorrowId != null" >
+         book_borrow_id = #{bookBorrowId}
+      </if>
+
+    </set>
+    where id = #{id}
+   </update>
+   
+   
+   <select id="queryAllByPage" resultType="map">
+   SELECT 
+			  bs.book_no bookNo,
+			  bs.book_name bookName,
+			  ms.username userName,
+			  br.borrow_date borrowDate,
+			  bb.return_time returnTime,
+			  br.return_date_info returnDateInfo ,
+			  bt.status  returnStatus
+       FROM
+			  books_return br 
+			  LEFT JOIN books bs 
+			    ON br.book_id = bs.id 
+			  LEFT JOIN myuser ms 
+			    ON ms.id = br.user_borrow_id 
+			  LEFT JOIN book_status bt
+			    ON br.book_status_id = bt.id   
+			  LEFT JOIN books_borrow bb
+			    ON  br.book_borrow_id=bb.id
+         WHERE  br.book_status_id IN(2,5,6,7)
+   
+   
+   </select>
+   
+
+   
+    <select id="queryAllSearchByPage" resultType="map">
+    SELECT 
+		  bs.book_no bookNo,
+		  bs.book_name bookName,
+		  ms.username userName,
+		  br.borrow_date borrowDate,
+		  bb.return_time returnTime,
+		  br.return_date_info returnDateInfo ,
+		  bt.status  returnStatus
+  
+   FROM
+			  books_return br 
+			  LEFT JOIN books bs 
+			    ON br.book_id = bs.id 
+			  LEFT JOIN myuser ms 
+			    ON ms.id = br.user_borrow_id 
+			  LEFT JOIN book_status bt
+			    ON br.book_status_id = bt.id   
+			  LEFT JOIN books_borrow bb
+			    ON  br.book_borrow_id=bb.id
+			    WHERE  br.book_status_id IN(2,5,6,7)
+      
+   				 <if test="userName!=null and userName!=''" >
+       			 and   ms.username like   CONCAT('%',#{userName},'%') 
+       			</if>
+       			
+       			 <if test="bookName!=null and bookName!=''" >
+       			 and  bs.book_name like  CONCAT('%',#{bookName},'%') 
+       			</if>
+       			
+       			<if test="bookNo!=null and bookNo !=''" >
+       			  and  bs.book_no like  CONCAT('%',#{bookNo},'%') 
+       			</if>
+    
+    </select>
+    
+    
+
+   <select id="selectByBorrowId"  parameterType="Integer" resultType="com.library.system.entity.BooksReturnEntity"> 
+        select * from books_return where book_borrow_id=#{borrowId}
+   </select>
+   
+   
+   <update id="updateBorrowStatusId" parameterType="map">
+     update books_return set book_status_id=#{bookStatusId},return_date_info=#{returnDateInfo} where book_borrow_id=#{bookBorrowId}
+   </update>
+</mapper>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>详情页</title>
+		<link rel="stylesheet" type="text/css" href="css/qian/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/details.css"/>
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.shtml" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.shtml" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.shtml" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryList.shtml" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.shtml" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="w">
+			<img  src="images/qian/banner.jpg"></img>
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.shtml">首页</a>→图书详情</span>
+			</div>
+		</div>
+		<!--详情-->
+		<div class="details w">
+			<div class="details-box clearfix">
+				<p class="details-p1">图书详情</p>
+				<div class="details-info clearfix">
+				<div class="details-pic">
+					<img id="showImg">
+				</div>
+				<!--表格-->
+				<table class="details-tab">
+					<tbody>
+						<tr>
+							<td class="details-td1">图书编号：</td>
+							<td class="details-td2" id="bookNo"></td>
+
+						</tr>
+						<tr>
+							<td class="details-td1">图书名：</td>
+							<td class="details-td2" id="bookName"></td>
+
+						</tr>
+						<tr>
+							<td class="details-td1">作者：</td>
+							<td class="details-td2" id="bookAuthor"></td>
+						</tr>
+						<tr>
+							<td class="details-td1">书架：</td>
+							<td class="details-td2" id="bookShelf"></td>
+						</tr>
+						<tr>
+							<td class="details-td1">出版社：</td>
+							<td class="details-td2" id="publishingHouse"></td>
+						</tr>
+						<tr>
+							<td class="details-td1">详情：</td>
+							<td class="details-td2" id="bookInfomation"></td>
+						</tr>
+						<tr>
+							<td class="details-td1">数量：</td>
+							<td class="details-td2" id="bookCount"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="book-return">
+				<a href="javascript:void(0);" onclick="history.go(-1)">返回</a>
+			</div>
+			</div>
+		</div>
+		<!--底部区域-->
+		<div class="down">
+			<div class="down-tel w">
+				<p>图书馆地址：河北省石家庄市新乐市空港工业园区无繁路69号</p>
+				<p>联系方式：0311-888888888</p>
+				<p>版权信息：Copyright © 图书馆</p>
+				<p>技术支持:李素杰</p>
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script src="js/swiper-3.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script> 
+		<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="js/form-validator.js"></script> 
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+        <script type="text/javascript" src="js/dictionary.js" ></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/jquery.params.js" ></script>
+		
+	<script type="text/javascript">
+	     
+			$(function(){
+				init();    
+			}); 
+			
+		function init(){
+			
+			id= $.query.get("id");
+			
+			if(id != null && id != ""){
+				$("#id").val(id);
+				var param = {id:id};
+				
+				var httpRequest = new HTTPRequest({
+					url : "books/selectById.ajax", 
+					data : param,
+					successFunc : function (data) {
+					    if(data!=null){
+					    	 $("#showImg").attr('src',getRootPath()+"/"+data.bookImgUrl)
+						       $("#bookNo").html(data.bookNo);
+						       $("#bookName").html(data.bookNo);
+						       $("#bookAuthor").html(data.bookAuthor);
+						       $("#bookShelf").html(data.bookShelf);
+						       $("#publishingHouse").html(data.publishingHouse);
+						       $("#bookInfomation").html(data.bookInfomation);
+						       $("#bookCount").html(data.bookCount);
+					    	}
+					    }
+				});
+			
+				httpRequest.sendJSON();
+			
+			}
+		}
+		
+		
+		  function getRootPath()  
+		   {  
+		      var pathName = window.location.pathname.substring(1);  
+		      var webName = pathName == '' ? '' : pathName.substring(0, pathName.indexOf('/'));  
+		      return window.location.protocol + '//' + window.location.host + '/'+ webName;  
+		   }  	
+			
+	</script>
+</html>

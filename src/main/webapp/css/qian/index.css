@@ -1,4 +1,4 @@
-/*鎮诞瀵艰埅*/
+/*悬浮导航*/
 input,
 button,
 select,
@@ -52,7 +52,7 @@ textarea {
 	cursor: pointer;
 }
 
-/*澶撮儴鍖哄煙*/
+/*头部区域*/
 .header {
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -79,7 +79,7 @@ textarea {
 
 .nav>ul>li {
 	float: left;
-	width: 200px;
+	width: 240px;
 	height: 40px;
 }
 
@@ -108,7 +108,7 @@ textarea {
 }
 
 
-/*浣嶇疆鏉�*/
+/*位置条*/
 
 .place {
 	height: 30px;
@@ -125,7 +125,7 @@ textarea {
 }
 
 
-/*宸︿晶鍐呭鍖哄煙*/
+/*左侧内容区域*/
 
 .content {
 	padding-bottom: 30px;
@@ -167,7 +167,7 @@ textarea {
 }
 
 
-/*鍏憡*/
+/*公告*/
 
 .public {
 	margin: 0 auto;
@@ -177,23 +177,24 @@ textarea {
 
 .public-p1 {
 	margin: 10px 10px;
+	padding:15px 0;
 }
 
-.public-p1>a {
+.public-p1>p>span {
 	font-size: 18px;
-	line-height: 35px;
+	line-height: 40px;
 }
 
 .public-sp1 {
 	display: block;
 	float: left;
-	width: 50%;
+	width: 70%;
 	overflow: hidden;
-	/*瓒呭嚭闅愯棌*/
+	/*超出隐藏*/
 	white-space: nowrap;
-	/*寮哄埗涓嶆崲琛�*/
+	/*强制不换行*/
 	text-overflow: ellipsis;
-	/*瓒呭嚭鐪佺暐鍙蜂唬鏇�*/
+	/*超出省略号代替*/
 }
 
 .public-sp2 {
@@ -209,7 +210,7 @@ textarea {
 }
 
 
-/*鍥句功鍒嗙被*/
+/*图书分类*/
 
 .ul {
 	margin-top: 10px;
@@ -242,7 +243,8 @@ textarea {
 }
 
 
-/*鍙充晶鍐呭*/
+/*右侧内容*/
+
 
 .content-right {
 	padding-top: 5px;
@@ -251,7 +253,8 @@ textarea {
 }
 
 
-/*鏂颁功鎺ㄨ崘*/
+/*新书推荐*/
+
 
 .newbook-ul {
 	width: 800px;
@@ -260,12 +263,16 @@ textarea {
 
 .UL2 {
 	float: left;
-	margin-left: 20px;
+	margin-left: 10px;
 	/*width: 350px;*/
 }
 
 .UL2>li {
-	padding: 0 10px;
+	padding: 1px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 270px;
 }
 
 .UL2>li:hover {
@@ -274,7 +281,7 @@ textarea {
 
 .UL2>li>a {
 	font-size: 20px;
-	margin-left: 20px;
+	margin-left: 5px;
 }
 
 .UL2>li>img {
@@ -285,7 +292,7 @@ textarea {
 }
 
 
-/*琛ㄦ牸*/
+/*表格*/
 
 .pic-win1 {
 	float: right;
@@ -326,7 +333,7 @@ textarea {
 }
 
 
-/*鍥句功鎺掕姒�*/
+/*图书排行榜*/
 
 .UL3 {
 	width: 350px;
@@ -348,6 +355,7 @@ textarea {
 	height: 20px;
 	position: relative;
 	top: 3px;
+	margin-right:10px;
 }
 
 .UL3>li>a {
@@ -361,7 +369,7 @@ textarea {
 }
 
 
-/*椤甸潰搴曢儴*/
+/*页面底部*/
 
 .down {
 	height: 200px;
@@ -380,7 +388,7 @@ textarea {
 }
 
 
-/*杩斿洖椤堕儴*/
+/*返回顶部*/
 
 #goToTop {
 	position: absolute;
@@ -399,7 +407,7 @@ textarea {
 	text-decoration: none;
 	line-height: 25px;
 }
-/*杩斿洖鎸夐挳*/
+/*返回按钮*/
 .book-return{
 	text-align: center;
 	padding: 20px 0;

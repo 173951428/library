@@ -50,10 +50,14 @@ $(function() {
 });
 $(function() {
 			//导航栏
+	
 			function navClick() {
+				
 				var url = window.location.pathname;
 				if(url.indexOf("libraryIndex") > 0) {
 					$("#libraryIndex").addClass('cur');
+					
+					
 
 				} else if(url.indexOf("libraryNewbooks") > 0) {
 					$("#libraryNewbooks").addClass('cur');

@@ -17,6 +17,8 @@ import com.library.system.utils.UUIDGenerator;
 public class MyUserServiceImp implements IMyUserService {
 	 @Autowired
      public SqlClient sqlClient;
+	 MyUser user;
+	 
 	/**
 	 * 检查用户名和密码
 	 */
@@ -28,8 +30,16 @@ public class MyUserServiceImp implements IMyUserService {
 	 */
 	@Transactional(isolation=Isolation.SERIALIZABLE,propagation=Propagation.SUPPORTS)
 	public MyUser CheckUser(MyUser myuser) {
+		user=sqlClient.queryForObject("mapper.MyUserMapper.checkUserExit", myuser);
 		return sqlClient.queryForObject("mapper.MyUserMapper.checkUserExit", myuser);
 	}
+	
+	public void checkDemo(Integer id){
+		 if(null!=user){
+			 System.out.println("得到的id:"+id);
+		 }
+	}
+	
 	@Override
 	public MyUser QueryById(String id) {
 		

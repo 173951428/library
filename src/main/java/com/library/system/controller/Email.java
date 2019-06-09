@@ -24,30 +24,37 @@ public class Email {
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
-        props.setProperty("mail.host", "smtp.qq.com");
+        
+        //1 .腾讯扣扣邮箱
+           props.setProperty("mail.host", "smtp.qq.com");
+      
         // 发送邮件协议名称
-        props.setProperty("mail.transport.protocol", "smtp");
+         props.setProperty("mail.transport.protocol", "smtp");
      
         MailSSLSocketFactory sf = new MailSSLSocketFactory();
         sf.setTrustAllHosts(true);
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.ssl.socketFactory", sf);
+        int i=0;
      while(true){
         Session session = Session.getInstance(props);
      
         Message msg = new MimeMessage(session);
-        msg.setSubject("图书管理系统修改密码验证");
+        msg.setSubject("你好?");
         StringBuilder builder = new StringBuilder();
-        builder.append("图书管理系统验证码:");
-        builder.append("123456!");
+       // builder.append("验证码为:");
+        builder.append("你好");
         msg.setText(builder.toString());
         msg.setFrom(new InternetAddress("719568690@qq.com"));
      
         Transport transport = session.getTransport();
-        transport.connect("smtp.qq.com", "719568690@qq.com", "kngqytyqbqajbaie");
-     
-        transport.sendMessage(msg, new Address[] { new InternetAddress("3352045217@qq.com") });
+       // 腾讯邮箱
+     transport.connect("smtp.qq.com", "719568690@qq.com", "kngqytyqbqajbaie");
+       
+        transport.sendMessage(msg, new Address[] { new InternetAddress("173951428@qq.com") });
         transport.close();
+        i++;
+        System.out.println("--------------------------->已发出邮件"+i+"封!!<---------------------------------------");
      }
 	}
 

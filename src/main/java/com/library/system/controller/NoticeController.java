@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.library.system.entity.NoticeEntity;
+import com.library.system.service.IMyUserService;
 import com.library.system.service.INoticeService;
 
 @Controller
@@ -21,6 +22,8 @@ import com.library.system.service.INoticeService;
 public class NoticeController {
 	@Autowired
 	INoticeService noticeService;
+	@Autowired
+	IMyUserService userServer;
 
 	@ResponseBody
 	@RequestMapping(value = "/showNotice", method = RequestMethod.POST)
@@ -39,6 +42,7 @@ public class NoticeController {
 	@RequestMapping(value = "/noticePublic", method = RequestMethod.POST)
 	public  Integer noticePublic(@RequestBody Map<String, Object> param){
 		Integer id=Integer.valueOf((String) param.get("id"));
+		// userServer.checkDemo(id);
 		return noticeService.NoticePublic(id);
 		
 	}
@@ -54,6 +58,7 @@ public class NoticeController {
 	@RequestMapping(value = "/deleteById", method = RequestMethod.POST)
 	public  Integer deleteById(@RequestBody Map<String, Object> param){
 		Integer id=Integer.valueOf((String) param.get("id"));
+		userServer.checkDemo(id);
 		return noticeService.deleteById(id);
 	}
 	

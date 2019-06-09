@@ -33,22 +33,19 @@
 			<div class="nav clearfix">
 				<ul>
 					<li>
-						<a href="libraryIndex.html" id="libraryIndex">首页</a>
+						<a href="libraryIndex.shtml" id="libraryIndex">首页</a>
 					</li>
 					<li>
-						<a href="libraryNewbooks.html" id="libraryNewbooks">新书推荐</a>
+						<a href="libraryNewbooks.shtml" id="libraryNewbooks">新书推荐</a>
 					</li>
 					<li>
-						<a href="libraryLend.html" id="libraryLend">图书借阅</a>
+						<a href="libraryLend.shtml" id="libraryLend">图书借阅</a>
 					</li>
 					<li>
-						<a href="libraryBack.html" id="libraryBack">归还续借</a>
+						<a href="libraryList.shtml" id="libraryList">图书排行</a>
 					</li>
 					<li>
-						<a href="libraryList.html" id="libraryList">图书排行</a>
-					</li>
-					<li>
-						<a href="libraryPerson.html" id="libraryPerson">个人中心</a>
+						<a href="libraryBorrowInfo.shtml" id="libraryPerson">个人中心</a>
 					</li>
 				</ul>
 			</div>
@@ -74,7 +71,7 @@
 		<div class="place w">
 			<div class="place-w">
 				<img src="images/qian/weizhi.png" />
-				<span>当前位置：<a href="libraryIndex.html">首页</a></span>
+				<span>当前位置：<a href="libraryIndex.shtml">首页</a></span>
 			</div>
 		</div>
 		<!--内容区域-->
@@ -95,68 +92,14 @@
 					</div>
 				</div>
 				<!--图书分类-->
-				<div class="content-title">
+				<!-- <div class="content-title">
 					<span class="sp">图书分类</span>
 					<div class="more">
 						<img src="images/qian/more.png" />
 						<a href="">更多&nbsp;&nbsp;></a>
 					</div>
-				</div>
-				<div class="ul">
-					<ul class="UL1">
-						<li>
-							<a href="">文学类</a>
-						</li>
-						<li>
-							<a href="">经济类</a>
-						</li>
-						<li>
-							<a href="">地理类</a>
-						</li>
-						<li>
-							<a href="">军事类</a>
-						</li>
-						<li>
-							<a href="">政治类</a>
-						</li>
-						<li>
-							<a href="">农业类</a>
-						</li>
-						<li>
-							<a href="">工业类</a>
-						</li>
-						<li>
-							<a href="">艺术类</a>
-						</li>
-
-					</ul>
-					<ul class="UL1">
-						<li>
-							<a href="">历史类</a>
-						</li>
-						<li>
-							<a href="">科学类</a>
-						</li>
-						<li>
-							<a href="">医学类</a>
-						</li>
-						<li>
-							<a href="">哲学类</a>
-						</li>
-						<li>
-							<a href="">教育类</a>
-						</li>
-						<li>
-							<a href="">语言类</a>
-						</li>
-						<li>
-							<a href="">生物类</a>
-						</li>
-						<li>
-							<a href="">综合类</a>
-						</li>
-					</ul>
-				</div>
+				</div> -->
+				
 			</div>
 			<div class="content-right">
 				<!--图书推荐-->
@@ -164,171 +107,43 @@
 					<span class="sp">新书推荐</span>
 					<div class="more">
 						<img src="images/qian/more.png" />
-						<a href="libraryNewbooks.html">更多&nbsp;&nbsp;></a>
+						<a href="libraryNewbooks.shtml">更多&nbsp;&nbsp;></a>
 					</div>
 				</div>
-				<div class="newbook-ul clearfix">
-					<ul class="UL2" id="UL2">
-						<li><img src="images/qian/right-arrow.png" />
-							<a href="javascript:void(0);">白说</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">你的善良必须有点锋芒</a>
-						</li>
-						<li><img src="images/qian/right-arrow.png" />
-							<a href="javascript:void(0);">论语</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">深入理解计算机系统</a>
-						</li>
-						<li><img src="images/qian/right-arrow.png" />
-							<a href="javascript:void(0);">墨菲定律</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">百度推广</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">百度推广</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">百度推广</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">百度推广</a>
-						</li>
-						<li><img src="images/qian/right-arrow (1).png" />
-							<a href="javascript:void(0);">百度推广</a>
-						</li>
-					</ul>
+				<div class="newbook-ul clearfix" >
+					 <ul class="UL2" id="UL2">
+						
+					</ul> 
 					<div id="pic-window">
 						<div class="pic-win1 clearfix">
 							<div class="pic-img">
-								<img src="images/qian/baidu.jpg" />
+								<img id="tuijian"/>
 							</div>
 							<!--表格-->
 							<table class="tab">
 								<tbody>
 									<tr>
 										<td class="td1">图书编号：</td>
-										<td class="td2">B-001</td>
+										<td class="td2"><p id="td2"></p></td>
 
 									</tr>
 									<tr>
 										<td class="td1">图书名：</td>
-										<td class="td2">《白说》</td>
+										<td class="td2">《<span id="td3"></span>》</td>
 
 									</tr>
 									<tr>
 										<td class="td1">作者：</td>
-										<td class="td2">白岩松</td>
+										<td class="td2"><p id="td4"></p></td>
 									</tr>
 
 									<tr>
-										<td class="td1">出版社：</td>
-										<td class="td2">长江文艺出版社</td>
+										<td class="td1">出版时间：</td>
+										<td class="td2"><p id="td5"></p></td>
 									</tr>
 									<tr>
 										<td class="td1">数量：</td>
-										<td class="td2">32</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="pic-win1 yincang clearfix">
-							<div class="pic-img">
-								<img src="images/qian/baidu.jpg" />
-							</div>
-							<!--表格-->
-							<table class="tab">
-								<tbody>
-									<tr>
-										<td class="td1">图书编号：</td>
-										<td class="td2">B-001</td>
-
-									</tr>
-									<tr>
-										<td class="td1">图书名：</td>
-										<td class="td2">《白说》</td>
-
-									</tr>
-									<tr>
-										<td class="td1">作者：</td>
-										<td class="td2">白岩松</td>
-									</tr>
-
-									<tr>
-										<td class="td1">出版社：</td>
-										<td class="td2">长江文艺出版社</td>
-									</tr>
-									<tr>
-										<td class="td1">数量：</td>
-										<td class="td2">32</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="pic-win1 yincang clearfix">
-							<div class="pic-img">
-								<img src="images/qian/baidu.jpg" />
-							</div>
-							<!--表格-->
-							<table class="tab">
-								<tbody>
-									<tr>
-										<td class="td1">图书编号：</td>
-										<td class="td2">B-001</td>
-
-									</tr>
-									<tr>
-										<td class="td1">图书名：</td>
-										<td class="td2">《白说》</td>
-
-									</tr>
-									<tr>
-										<td class="td1">作者：</td>
-										<td class="td2">白岩松</td>
-									</tr>
-
-									<tr>
-										<td class="td1">出版社：</td>
-										<td class="td2">长江文艺出版社</td>
-									</tr>
-									<tr>
-										<td class="td1">数量：</td>
-										<td class="td2">32</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="pic-win1 yincang clearfix">
-							<div class="pic-img">
-								<img src="images/qian/baidu.jpg" />
-							</div>
-							<!--表格-->
-							<table class="tab">
-								<tbody>
-									<tr>
-										<td class="td1">图书编号：</td>
-										<td class="td2">B-001</td>
-
-									</tr>
-									<tr>
-										<td class="td1">图书名：</td>
-										<td class="td2">《白说》</td>
-
-									</tr>
-									<tr>
-										<td class="td1">作者：</td>
-										<td class="td2">白岩松</td>
-									</tr>
-
-									<tr>
-										<td class="td1">出版社：</td>
-										<td class="td2">长江文艺出版社</td>
-									</tr>
-									<tr>
-										<td class="td1">数量：</td>
-										<td class="td2">32</td>
+										<td class="td2"><p id="td6"></p></td>
 									</tr>
 								</tbody>
 							</table>
@@ -342,49 +157,13 @@
 					<span class="sp">图书排行榜</span>
 					<div class="more">
 						<img src="images/qian/more.png" />
-						<a href="libraryList.html">更多&nbsp;&nbsp;></a>
+						<a href="libraryList.shtml">更多&nbsp;&nbsp;></a>
 					</div>
 				</div>
 				<div style="margin-top: 10px;">
 					<ul class="UL3" id="UL3" style="float: left;">
-						<li><img src="images/qian/crown.png" />
-							<a href="">白说</a>
-						</li>
-						<li><img src="images/qian/crown (1).png" />
-							<a href="">你的善良必须有点锋芒</a>
-						</li>
-						<li><img src="images/qian/crown (2).png" />
-							<a href="">论语</a>
-						</li>
-						<li><img src="images/qian/1.png" />
-							<a href="">深入理解计算机系统</a>
-						</li>
-						<li><img src="images/qian/2.png" />
-							<a href="">墨菲定律</a>
-						</li>
-						<li><img src="images/qian/3.png" />
-							<a href="">百度推广</a>
-						</li>
 					</ul>
-					<ul class="UL3" id="UL3" style="float: right;">
-						<li><img src="images/qian/4.png" />
-							<a href="">白说</a>
-						</li>
-						<li><img src="images/qian/5.png" />
-							<a href="">你的善良必须有点锋芒</a>
-						</li>
-						<li><img src="images/qian/6.png" />
-							<a href="">论语</a>
-						</li>
-						<li><img src="images/qian/7.png" />
-							<a href="">深入理解计算机系统</a>
-						</li>
-						<li><img src="images/qian/8.png" />
-							<a href="">墨菲定律</a>
-						</li>
-						<li><img src="images/qian/9.png" />
-							<a href="">百度推广</a>
-						</li>
+					<ul class="UL3" id="UL4" style="float: right;">	
 					</ul>
 				</div>
 
@@ -451,8 +230,58 @@
 			$(function(){
 				// 显示公告
 				showNotice();
+				showNewBooksBySeven();
+				booksTop();
 			}); 
 			
+			// 新书推荐
+			function showNewBooksBySeven(){
+				 
+				var httpRequest = new HTTPRequest({
+					url : "books/NewbooksRecommendation.ajax",
+					successFunc : function (data) {	
+						$.each(data, function(i,n) {
+							 if(i==0){
+								 $("#tuijian").attr("src",getRootPath()+"/"+n.book_img_url)
+								  $("#td2").html(n.book_no)
+								  $("#td3").html(n.book_name)
+								  $("#td4").html(n.book_author)
+								  $("#td5").html(n.book_out_time)
+								  $("#td6").html(n.book_count) 
+							 }
+ 						   $("#UL2").append('<li onclick="selectNewById('+n.id+')"><img src="images/qian/right-arrow (1).png"> <a href="javascript:void(0);">'+n.book_name+' </a> </li>');
+                        });
+	
+					  }
+				});
+			
+				httpRequest.sendJSON();
+			}
+			
+			  // 根据id查询
+			 function  selectNewById(id){
+				   var param = {id:id};
+				    if(id!= null && id !=""){
+				    	var httpRequest = new HTTPRequest({
+							url : "books/selectById.ajax",
+							data : param,
+							successFunc : function (data) {	
+								 $("#tuijian").attr('src',getRootPath()+"/"+data.bookImgUrl)
+								  $("#td2").html(data.bookNo)
+								  $("#td3").html(data.bookName)
+								  $("#td4").html(data.bookAuthor)
+								  $("#td5").html(data.bookOutTime)
+								  $("#td6").html(data.bookCount)								 
+							  }
+						});
+					
+						httpRequest.sendJSON();
+				    } 
+				
+			 }
+			  
+		
+			  
 			function showNotice(){
 				var httpRequest = new HTTPRequest({
 					url : "notice/showNotice.ajax",
@@ -467,9 +296,41 @@
 				httpRequest.sendJSON();
 			}
 			
+			  // 图书排行榜 现实前8个
+			function booksTop(){
+				var httpRequest = new HTTPRequest({
+					url : "books/selectToEight.ajax",
+					successFunc : function (data) {	
+						$.each(data, function(i,n) {
+							 if(i<=3){
+								 $("#UL3").append('<li><img src="images/qian/' +i+'.png"/>' + '<a href="#" onclick="selectBooksById('+n.id +')">'+n.book_name+'</a></li>')
+							 }else if(i>3){
+								 $("#UL4").append('<li><img src="images/qian/' +i+'.png"/>' + '<a href="#" onclick="selectBooksById('+n.id +')">'+n.book_name+'</a></li>')
+							 }
+                        });
+	
+					  }
+				});
+			
+				httpRequest.sendJSON();
+			}
+			
 			 function showNoticeById(id){
 				 location.href="noticeInfo.shtml?id="+id;
 			 }
+			 
+			  function getRootPath()  
+			   {  
+			      var pathName = window.location.pathname.substring(1);  
+			      var webName = pathName == '' ? '' : pathName.substring(0, pathName.indexOf('/'));  
+			      return window.location.protocol + '//' + window.location.host + '/'+ webName;  
+			   }   
+			  
+			   //根据书籍的id查找
+			  function selectBooksById(id){
+				  location.href="libraryDetails.shtml?id="+id;
+			  }
+			   
 		</script>
 	</body>
 

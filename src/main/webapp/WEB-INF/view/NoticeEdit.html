@@ -28,7 +28,7 @@
 						
 						<tr>
 						    
-							<td class="tdValue" style="width: 5px;"><font>标题：</font></td>
+							<td class="tdValue" style="width: 1%;"><font>标题：</font></td>
 							<td class="tdValue">
 							    <input type="hidden" id="id" name="id">
 								<input type="text" class="input-text" value="" placeholder="" id="title" name="title" nullableError="标题不能为空" MaxLength=50 />
@@ -37,9 +37,9 @@
 						 </tr>	
 						 
 						 <tr>
-							<td class="tdValue" style="width: 5px;"><font>内容：</font></td>
+							<td class="tdValue" style="width: 1%;"><font>内容：</font></td>
 							<td class="tdValue">
-						        <textarea rows="3" cols="20"  id="details"    name="details">	</textarea>					
+						        <textarea rows="3" cols="110"  id="details"    name="details">	</textarea>					
 						     </td>
 						 </tr>	
 				
@@ -47,7 +47,7 @@
 				</fieldset>
 			<div class="row cl">
 				<div class="divCenter">
-					<input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;" onclick="MyUserSave()">
+					<input class="btn btn-primary radius" type="button" value="&nbsp;&nbsp;保存&nbsp;&nbsp;" onclick="noticeSave()">
 					<input class="btn btn-primary radius" type="reset" value="&nbsp;&nbsp;重置&nbsp;&nbsp;">
 				</div>
 			</div>
@@ -75,6 +75,7 @@
 			//初始化编辑 用户
 			function initPage(){
 				//父页面传过来的id 
+				
 				var id = $("#id", parent.document).val();
 				if(id != null && id != ""){
 					$("#id").val(id);
@@ -96,11 +97,11 @@
 		     
 		
 			//保存 
-			function MyUserSave(){
+			function noticeSave(){
 				if(validateForm("form-notice-save")){
 					var paramSave = ZcefUtils.obtainValues("form-notice-save");  
 					var httpRequest = new HTTPRequest({
-						url : "notice/saveOrUpdate.ajax",
+						url : "notice/saveOrUpdate.ajax", 
 						data : paramSave, 
 						successFunc : function (data) {
 							if(data==1){

@@ -7,7 +7,7 @@ import com.library.system.entity.PageEntity;
 
 /**
  * 查询服务的接口
- * @author zhaoxinping
+ * @author lisujie
  *
  */
 public interface IQueryService {

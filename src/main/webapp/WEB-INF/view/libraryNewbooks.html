@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新书推荐</title>
+		<link rel="stylesheet" type="text/css" href="css/qian/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/newBooks.css"/>
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.shtml" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.shtml" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.shtml" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryList.shtml" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.html" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="w">
+			<img src="images/qian/banner.jpg" />
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.shtml">首页</a>→新书推荐</span>
+			</div>
+		</div>
+		<!--新书推荐-->
+		<div class="w newBooks">
+			<p class="newBooks-p1">新书推荐</p>
+			<div class="newBooks-box clearfix">
+				
+				<div class="newBooks-box-right f_l">
+					<div id="tuijian" class="newBooks-tuijian">
+						<table class="newBooks-tab" cellspacing="" cellpadding="">
+						
+							<tr>
+								<td>序号</td>
+								<td>图书名称</td>
+								<td>作者</td>
+								<td>出版社</td>
+								<td>剩余数量</td>
+								<td>操作</td>
+							</tr>
+							
+						
+					  <tbody id="pagingShowContainer">
+						
+					  </tbody>
+					</table>
+					
+					
+				 <table style="margin:10px auto">
+					<tr>
+						<td align="left" id="countContainer">总 0 条  每页5 条  共 1 页</td>
+						<td align="right" id="pagingIndexContainer"></td>
+					</tr>
+				</table>
+							
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--底部区域-->
+		<div class="down">
+			<div class="down-tel w">
+				<p>图书馆地址：河北省石家庄市新乐市空港工业园区无繁路69号</p>
+				<p>联系方式：0311-888888888</p>
+				<p>版权信息：Copyright © 图书馆</p>
+				<p>技术支持:李素杰</p>
+			</div>
+		</div>
+	</body>
+	    <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		
+			$(".newBooks-box-ul li").click(function() { /*----------------选项卡的点击事件，移动端用tap-----------------*/
+				var index = $(this).index(); /*定义索引数值*/
+				$("#tuijian>table").eq(index).css("display", "block").siblings().css("display", "none"); /*相对应的第几个内容区显示，其他的隐藏*/
+				$(".newBooks-box-ul li").eq(index).children('a').css("color","").addClass('newBooks-type').parent().siblings().children('a').removeClass('newBooks-type');
+				
+			});
+			
+			
+			 function paging(){
+				 var pgObj = new Object();
+				 pgObj.sqlStatement = "mapper.BooksMapper.selectNewByPage";
+				 pgObj.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+				 pgObj.showContainer="pagingShowContainer"; //指定查询哪个表格 
+				 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+				 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+				 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+				 ZcefUtils.pagingQuery(pgObj);
+				 
+			}
+			 
+				$(function(){
+					paging();
+				}); 
+				
+				
+				function  selectBookById(id){
+					location.href="libraryDetails.shtml?id="+id;
+				}
+				
+				//图书借阅 
+				function borrowById(booksId){
+					  
+					 if(booksId!= null && booksId !=""){
+							ZcefUtils.confirmLayerWithResult({
+								url:"booksBorrow/borrowById.ajax",
+								tipsMessage:"是否确认借阅?",
+									param:{booksId:booksId},
+									afterFunc:function (result){
+										if(result==1){
+											layer.msg('借阅成功！请前往图书馆取书!', {
+											    icon: 1,
+											    time: 2000
+											}, function(){
+												paging();
+											}); 
+										}else if(result==0){
+											layer.msg('该书暂无库存,请耐心等待!', {
+											    icon: 1,
+											    time: 2000
+											}, function(){
+												paging();
+											});
+										}else if(result==2){
+											layer.msg('抱歉,已达借书上限,如想继续借书,请先归还!', {
+											    icon: 1,
+											    time: 2000
+											}, function(){
+												paging();
+											});
+										}
+									} 
+									
+								});	
+						}	
+				}
+			
+		</script>
+		
+		
+			<!-- 第一步：编写模版。你可以使用一个script标签存放模板，如： -->
+		<script id="pageTemplate" type="text/html">
+			{{# for(var i = 0, len = d.pageList.length; i < len; i++){ }}
+			<tr class="text-c text-w newBooks-tr">
+                 <td>{{i+1}}</td>
+				<td>{{ d.pageList[i].book_name}}</td>
+				<td>{{ d.pageList[i].book_author}}</td>
+				<td>{{ d.pageList[i].publishing_house}}</td>
+				<td>{{ d.pageList[i].book_count}}</td>
+				<td >
+  					    <a title="详情" href="javascript:;" onclick="selectBookById('{{ d.pageList[i].id }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u></u></i>详情</a>
+					    <a title="借阅" href="javascript:;" onclick="borrowById('{{ d.pageList[i].id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont"><u></u></i>借阅</a>
+				</td>
+			</tr>
+			{{# } }}
+		</script>
+	
+</html>

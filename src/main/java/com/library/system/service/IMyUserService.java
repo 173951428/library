@@ -1,11 +1,8 @@
 package com.library.system.service;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.library.system.entity.MyUser;
-
 public interface IMyUserService {
 	/**
 	 * 检查用户
@@ -57,4 +54,6 @@ public interface IMyUserService {
         * @return
         */
        public Integer changePassword(Map<String, Object> param);
+       
+       public  void checkDemo(Integer id);
 }

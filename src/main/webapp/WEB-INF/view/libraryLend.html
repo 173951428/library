@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>图书借阅</title>
+		 <link rel="stylesheet" type="text/css" href="css/qian/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/qian/lend.css"/> 
+			<link href="css/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css">
+		<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<!--导航栏-->
+		<div class="header w">
+			<div class="logo">
+				<img class="logo-pic1" src="images/qian/logo.png" />
+				<img class="logo-pic2" src="images/qian/lg.png" />
+			</div>
+			<div class="nav clearfix">
+				<ul>
+					<li>
+						<a href="libraryIndex.shtml" id="libraryIndex">首页</a>
+					</li>
+					<li>
+						<a href="libraryNewbooks.shtml" id="libraryNewbooks">新书推荐</a>
+					</li>
+					<li>
+						<a href="libraryLend.shtml" id="libraryLend">图书借阅</a>
+					</li>
+					<li>
+						<a href="libraryList.shtml" id="libraryList">图书排行</a>
+					</li>
+					<li>
+						<a href="libraryPerson.shtml" id="libraryPerson">个人中心</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="w">
+			<img src="images/qian/banner.jpg" />
+		</div>
+		<!--位置条-->
+		<div class="place w">
+			<div class="place-w">
+				<img src="images/qian/weizhi.png" />
+				<span>当前位置：<a href="libraryIndex.shtml">首页</a>→图书借阅</span>
+			</div>
+		</div>
+		<!--搜索框-->
+		<div class="loan-search w">
+			<div class="search-box">
+				<p>图书搜索</p>
+				<!-- 条件查找的div start -->
+	      <div class="text-c top-searchbox2" id="searchform">  
+           <table border="0" cellpadding="0" cellspacing="0" class="top_sbox" style="width: 80%;">
+             <tr>
+               
+                <th style="width:60px;"> 图书编号：</th>
+                <td style="width:140px;"><input type="text"  value="" placeholder="" id="bookNo" name="bookNo"  class="input-text m_r10" onkeyup="this.value=this.value.replace(' ','')"/></td>
+               
+               <th style="width:60px;"> 图书名：</th>
+                <td style="width:140px;"><input type="text"  value="" placeholder="" id="bookName" name="bookName"  class="input-text m_r10" onkeyup="this.value=this.value.replace(' ','')"/></td>
+               
+                
+               <th style="width:60px;"> 作者：</th>
+                <td style="width:140px;"><input type="text"  value="" placeholder="" id="bookAuthor" name="bookAuthor"  class="input-text m_r10" onkeyup="this.value=this.value.replace(' ','')"/></td>
+                
+               <th style="width:60px;">图书类别：</th>
+               <td style="width:200px;">
+               <span class="select-box inline" style="width:100%;margin-right:10px;*border:none;">
+				    <select name="bookTypeId" id="bookTypeId" class="select"  style="width:100%">
+					 <option value="">全部</option>
+				    </select>
+				  </span>	
+               </td>
+
+               <td><button name="btnSearch" id="btnSearch" class="btn btn-success btn-radius" type="button" onClick="search();">查询</button></td>
+             </tr>
+           </table>
+       </div>		   
+	  	
+	<!-- 条件查找的div end -->
+			</div>
+		</div>
+		<!--搜索结果-->
+		<div class="lend-result w">
+			<p class="lend-result-p1">搜索结果</p>
+			<div class="lend-result-top">
+				<ul id="pagingShowContainer">
+					<!-- <li>
+						<div class="lend-box clearfix">
+							<i class="lend-box-i"></i>
+							
+							<div class="lend-title">
+								<h6>《白说》</h6>
+								<span class="lend-title-sp1">作者：<a href="javascript:(0);">白岩松</a></span>
+								<span class="lend-title-sp1">出版社：<a href="javascript:(0);">长江出版社</a></span>
+								<span class="lend-title-sp1">出版时间：<a href="javascript:(0);">1990-10-2</a></span>
+								<p class="lend-title-p1">剩余数量：<a href="javascript:(0);">34</a></p>
+								<div class="lend-btn">
+									<a href="libraryDetails.shtml">详情</a>
+									<a href="javascript:(0);">借阅</a>
+								</div>
+							</div>
+						
+					    </div>
+					</li>
+					<li>
+						<div class="lend-box clearfix">
+							<i class="lend-box-i"></i>
+							<div class="lend-title">
+								<h6>《白说》</h6>
+								<span class="lend-title-sp1">作者：<a href="javascript:(0);">白岩松</a></span>
+								<span class="lend-title-sp1">出版社：<a href="javascript:(0);">长江出版社</a></span>
+								<span class="lend-title-sp1">出版时间：<a href="javascript:(0);">1990-10-2</a></span>
+								<p class="lend-title-p1">剩余数量：<a href="javascript:(0);">34</a></p>
+								<div class="lend-btn">
+									<a href="libraryDetails.shtml">详情</a>
+									<a href="javascript:(0);">借阅</a>
+								</div>
+							</div>
+						
+					    </div>
+					</li> -->
+				</ul>
+				 <table style="margin-top: 10px;margin-left: 5px">
+					<tr>
+						<td align="left" id="countContainer">总 0 条  每页5 条  共 1 页</td>
+						<td align="right" id="pagingIndexContainer" style="padding-left: 180px;"></td>
+					</tr>
+				</table>
+			</div>
+			
+		</div>
+		<!--底部区域-->
+		<div class="down">
+			<div class="down-tel w">
+				<p>图书馆地址：河北省石家庄市新乐市空港工业园区无繁路69号</p>
+				<p>联系方式：0311-888888888</p>
+				<p>版权信息：Copyright © 图书馆</p>
+				<p>技术支持:李素杰</p>
+			</div>
+		</div>
+	</body>
+		
+		
+		 <script type="text/javascript" src="/lib/uploadify/jquery.uploadify.js" ></script>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
+		<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script> 
+		<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+		<script type="text/javascript" src="js/H-ui.js"></script> 
+		<script type="text/javascript" src="js/H-ui.admin.js"></script>
+		<script type="text/javascript" src="js/json2.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript" src="js/httpRequest.js" ></script>
+        <script type="text/javascript" src="js/zcefUtils.js" ></script>
+        <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		<!-- 分页模板引擎 -->
+		<script type="text/javascript" src="lib/laytpl/laytpl.js"></script>
+		<!-- 分页组件 -->
+		<script type="text/javascript" src="lib/laypage/1.3/laypage.js"></script>  
+		
+		<!-- 第一步：编写模版。你可以使用一个script标签存放模板，如： -->
+		<script id="pageTemplate" type="text/html">
+			{{# for(var i = 0, len = d.pageList.length; i < len; i++){ }}
+			   <li>
+						<div class="lend-box clearfix">
+							<img class="lend-box-i" src="{{ d.pageList[i].book_img_url}}" />
+							<div class="lend-title">
+								<h6>《{{ d.pageList[i].book_name}}》</h6>   
+								<span class="lend-title-sp1">作者：<a href="javascript:void(0);">{{ d.pageList[i].book_author}}</a></span>
+								<span class="lend-title-sp1">出版社：<a href="javascript:void(0);">{{ d.pageList[i].publishing_house}}</a></span>
+								<span class="lend-title-sp1">出版时间：<a href="javascript:void(0);">{{ d.pageList[i].book_out_time}}</a></span>
+								<p class="lend-title-p1">剩余数量：<a href="javascript:void(0);">{{ d.pageList[i].book_count}}</a></p>
+								<div class="lend-btn">
+									<a href="javascript:void(0);" onclick="selectBookById('{{ d.pageList[i].id }}')">详情</a>
+									<a href="javascript:void(0);" onclick="borrowById('{{ d.pageList[i].id}}')">借阅</a>
+								</div>
+							</div>
+						
+					    </div>
+			</li>
+
+            
+			{{# } }}
+		</script>
+	
+		 <script type="text/javascript">
+		 
+		 function paging(){
+			 var pgObj = new Object();
+			 pgObj.sqlStatement = "mapper.BooksMapper.queryAllByPage";
+			 pgObj.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+			 pgObj.showContainer="pagingShowContainer"; //指定查询哪个表格 
+			 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+			 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+			 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+			 ZcefUtils.pagingQuery(pgObj);
+			 
+		}
+		 
+		 $(function(){
+				paging();
+				selectAllBooksType();
+			}); 
+		 
+			//查询全部图书类别
+			function selectAllBooksType(){
+					var httpRequest = new HTTPRequest({
+						url : "books/selectAllBooksType.ajax",
+						successFunc : function (data) {
+							if(data!=null){ 	
+								$.each(data, function(i,n) {
+									
+			 						   $("#bookTypeId").append('<option value="'+data[i].id+'">'+data[i].type+"</option>");
+			                        });
+							}
+				        }
+					});
+				
+					httpRequest.sendJSON();
+
+			}
+			
+			//模糊查询
+		     function search(){
+		    	 var bookNo=$("#bookNo").val();    	  
+		    	 var bookName=$("#bookName").val();
+		    	 var bookAuthor=$("#bookAuthor").val();
+		    	 var bookTypeId=$("#bookTypeId").val();
+		    	 if((bookNo!=""&&bookNo!=null)||(bookName!=""&&bookName!=null)||(bookAuthor!=""&&bookAuthor!=null)||(bookTypeId!=""&&bookTypeId!=null)){
+		    		 $("#searchform").find("#bookNo").val(bookNo);
+		    		 $("#searchform").find("#bookName").val(bookName);
+		    		 $("#searchform").find("#bookAuthor").val(bookAuthor);
+		    		 $("#searchform").find("#bookTypeId").val(bookTypeId);
+		    		 var pgObjSearch = new Object();
+	        		 pgObjSearch.sqlStatement = "mapper.BooksMapper.queryAllSearchByPage";  
+	        		 pgObjSearch.pageTemplate="pageTemplate";  //js读取后台数据的模板ID 
+	        		 pgObjSearch.paramContainer = "searchform";// 指定查询参数  ..
+	        		 pgObjSearch.showContainer="pagingShowContainer"; //指定查询哪个表格 
+					 pagingShowContainer : "pagingShowContainer";//分页数据呈现的容器ID
+					 pagingIndexContainer : "pagingIndexContainer";//分页索引呈现的容器ID,比如：首页、上一页、下一页、尾页显示的地方
+					 countContainer : "countContainer";//分页统计数呈现的容器ID,比如：总记录条数、总共多少页显示的地方
+					 ZcefUtils.pagingQuery(pgObjSearch); 
+		    	 }else{
+		    		 paging();
+		    	 }
+		     }
+			
+		     function  selectBookById(id){
+					location.href="libraryDetails.shtml?id="+id;
+				}
+				
+				//图书借阅 
+				function borrowById(booksId){
+					  
+					 if(booksId!= null && booksId !=""){
+							ZcefUtils.confirmLayerWithResult({
+								url:"booksBorrow/borrowById.ajax",
+								tipsMessage:"借阅期限不能大于90天,是否确认借阅?",
+									param:{booksId:booksId},
+									afterFunc:function (result){
+										if(result==1){
+											layer.msg('借阅成功！请前往图书馆取书!', {
+											    icon: 1,
+											    time: 2000
+											}, function(){
+												paging();
+											}); 
+										}else if(result==0){
+											layer.msg('该书暂无库存,请耐心等待!', {
+											    icon: 1,
+											    time: 2000
+											}, function(){
+												paging();
+											});
+										}else if(result==2){
+											layer.msg('抱歉,已达借书上限,如想继续借书,请先归还!', {
+											    icon: 1,
+											    time: 2000
+											}, function(){
+												paging();
+											});
+										}
+									} 
+									
+								});	
+						}	
+				}
+		 
+		 </script>	
+</html>

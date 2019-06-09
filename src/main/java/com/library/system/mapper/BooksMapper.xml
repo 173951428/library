@@ -3,9 +3,10 @@
 <mapper namespace="mapper.BooksMapper" >
   <resultMap id="BaseResultMap" type="com.library.system.entity.BookManageEntity" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="book_no" property="bookNo" jdbcType="INTEGER" />
+    <result column="book_no" property="bookNo" jdbcType="VARCHAR" />
     <result column="book_name" property="bookName" jdbcType="VARCHAR" />
     <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+    <result column="publishing_house" property="publishingHouse" jdbcType="VARCHAR" />
     <result column="book_out_time" property="bookOutTime" jdbcType="DATE" />
     <result column="book_infomation" property="bookInfomation" jdbcType="VARCHAR" />
     <result column="book_shelf" property="bookShelf" jdbcType="VARCHAR" />
@@ -13,6 +14,7 @@
     <result column="book_count" property="bookCount" jdbcType="INTEGER" />
     <result column="book_img_url" property="bookImgUrl" jdbcType="VARCHAR" />
     <result column="book_out_sum" property="bookOutSum" jdbcType="INTEGER" />
+     <result column="book_int_time" property="bookIntTime" jdbcType="DATE" />
          
   
     
@@ -20,25 +22,27 @@
     
   </resultMap>
   <sql id="Base_Column_List" >
-    id,bookNo,bookName,bookAuthor,bookOutTime,bookInfomation,bookShelf,bookTypeId,bookCount,bookImgUrl,bookOutSum
+    id,bookNo,bookName,bookAuthor,publishingHouse,bookOutTime,bookInfomation,bookShelf,bookTypeId,bookCount,bookImgUrl,bookOutSum,bookIntTime
   </sql>
-  <!-- 前台用的 查询7条数据 -->
-  <select id="showNotice" resultType="map">
-      SELECT n.id AS id, n.title AS title,n.public_time AS publicTime  FROM notice n LEFT JOIN myuser  m ON  n.pubilc_author_id=m.id  WHERE n.is_public=1 ORDER BY n.public_time  DESC LIMIT 7
-  </select>
+
   
   
   <select id="selectById" parameterType="INTEGER" resultType="map">
-  	SELECT 
-	 	 n.title title,
-	 	 n.public_time publicTime,
-	 	 m.username userName,
-		 n.details details
-	FROM
-  		notice n 
-  	INNER JOIN myuser m 
-   		 ON m.id = n.pubilc_author_id 
-	WHERE n.id =#{id}	
+  	   SELECT 
+			b.id,
+			b.book_no bookNo,
+			b.book_name bookName,
+			b.book_author bookAuthor,
+			b.publishing_house publishingHouse,
+			b.book_out_time bookOutTime,
+			b.book_infomation bookInfomation,
+			b.book_shelf bookShelf,
+			b.book_type_id bookTypeId,
+			b.book_img_url bookImgUrl,
+			b.book_count bookCount,
+			b.book_out_sum bookOutSum
+ 		FROM books b LEFT JOIN book_type t ON b.book_type_id=t.id
+ 		where b.id=#{id}
    
   </select>
    <!-- 后台用的查询全部 -->
@@ -48,17 +52,29 @@
 			b.book_no,
 			b.book_name,
 			b.book_author,
+			b.publishing_house,
 			b.book_out_time,
 			b.book_infomation,
 			b.book_shelf,
 			t.type,
 			b.book_img_url,
 			b.book_count,
-			b.book_out_sum
+			b.book_out_sum,			
+			DATE_FORMAT(b.book_int_time,'%Y-%m-%d %H:%i:%s') book_int_time
  		FROM books b LEFT JOIN book_type t ON b.book_type_id=t.id
   </select>	
  
- 
+ <select id="selectNewTopSeven" resultType="map">
+  SELECT   *  FROM books  ORDER BY  book_int_time DESC LIMIT 10 
+ </select>
+ <!-- 根据借书数量现实前8个 -->
+ <select id="selectToEight"  resultType="map">
+ SELECT   *  FROM books  ORDER BY  book_out_sum DESC LIMIT 8
+ </select>
+ <!-- 新书推荐 -->
+ <select id="selectNewByPage" resultType="map">
+  SELECT   *  FROM books  ORDER BY  book_int_time DESC 
+ </select>
  
    <!-- 带条件的分页模糊查询 -->
    <select id="queryAllSearchByPage" resultType="map" parameterType="map">
@@ -68,13 +84,15 @@
 			b.book_no,
 			b.book_name,
 			b.book_author,
+			b.publishing_house,
 			b.book_out_time,
 			b.book_infomation,
 			b.book_shelf,
 			t.type,
 			b.book_img_url,
 			b.book_count,
-			b.book_out_sum
+			b.book_out_sum,
+			DATE_FORMAT(b.book_int_time,'%Y-%m-%d %H:%i:%s') book_int_time
  		FROM books b LEFT JOIN book_type t ON b.book_type_id=t.id
 			   where  1=1
    				 <if test="bookNo!=null and bookNo!=''" >
@@ -94,77 +112,167 @@
        			</if>
    </select>
   
-    <update id="NoticePublic" parameterType="INTEGER">
-       UPDATE notice SET is_public=1 WHERE ID=#{id}
-    </update>
-    
-     <update id="CancelPublic" parameterType="INTEGER">
-       UPDATE notice SET is_public=0 WHERE ID=#{id}
-    </update>
-    
-    <update id="updateNoticeById"  parameterType="map">
-       UPDATE notice SET title=#{title} ,details=#{details} where ID=#{id}
-    </update>
-    
-    <select id="queryById" resultType="map" parameterType="map">
-    select * from notice where id=#{id}
-    </select>
-   <delete id="deleteById" parameterType="INTEGER" >
-       DELETE FROM notice WHERE id=#{id}
-   </delete>
-  
- <insert id="insertNotice"  parameterType="com.library.system.entity.NoticeEntity">
-       insert into notice
+
+ <insert id="insertBook"  parameterType="com.library.system.entity.BookManageEntity">
+       insert into books
        <trim prefix="(" suffix=")" suffixOverrides="," >
         
-      <if test="title != null" >
-        title,
+      <if test="bookNo != null" >
+        book_no,
       </if>
       
-       <if test="details != null" >
-        details,
+       <if test="bookName != null" >
+        book_name,
       </if>
       
-       <if test="publicTime != null" >
-        public_time,
+       <if test="bookAuthor != null" >
+        book_author,
       </if>
       
-      <if test="pubilcAuthorId != null" >
-        pubilc_author_id,
+       <if test="publishingHouse != null" >
+        publishing_house,
+      </if>
+      
+      <if test="bookOutTime != null" >
+        book_out_time,
       </if>
      
       
-       <if test="isPlulic != null" >
-       is_public,
+       <if test="bookInfomation != null" >
+       book_infomation,
+       </if>
+      
+      <if test="bookShelf != null" >
+       book_shelf,
+       </if>
+      
+      <if test="bookTypeId != null" >
+       book_type_id,
        </if>
       
       
+      <if test="bookCount != null" >
+       book_count,
+       </if>
+
+      <if test="bookImgUrl != null" >
+       book_img_url,
+       </if>
+       
+        <if test="bookOutSum != null" >
+       book_out_sum,
+       </if>
+       
+       <if test="bookIntTime != null" >
+       book_int_time,
+       </if>
      </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
      
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
+      <if test="bookNo != null" >
+        #{bookNo},
       </if>  
       
-      <if test="details != null" >
-        #{details},
+      <if test="bookName != null" >
+        #{bookName},
       </if>  
       
-       <if test="publicTime != null" >
-        #{publicTime},
+       <if test="bookAuthor != null" >
+        #{bookAuthor},
+      </if>  
+       
+       <if test="publishingHouse != null" >
+        #{publishingHouse},
+      </if> 
+      
+       <if test="bookOutTime != null" >
+        #{bookOutTime},
       </if>  
       
-       <if test="pubilcAuthorId != null" >
-        #{pubilcAuthorId},
+       <if test="bookInfomation != null" >
+        #{bookInfomation},
       </if>  
       
-       <if test="isPlulic != null" >
-        #{isPlulic},
+        <if test="bookShelf != null" >
+        #{bookShelf},
       </if>  
       
+        <if test="bookTypeId != null" >
+        #{bookTypeId},
+      </if>  
       
+        <if test="bookCount != null" >
+        #{bookCount},
+      </if>  
+      
+        <if test="bookImgUrl != null" >
+        #{bookImgUrl},
+      </if>  
+      
+        <if test="bookOutSum != null" >
+        #{bookOutSum},
+      </if> 
+      
+      <if test="bookIntTime != null" >
+        #{bookIntTime},
+      </if> 
     </trim>
    </insert>
    
-  
+    <update id="updateBook" parameterType="string">
+       update books
+    <set >
+       <if test="bookNo != null" >
+        book_no = #{bookNo},
+      </if>
+      <if test="bookName != null" >
+        book_name = #{bookName},
+      </if> 
+      
+       <if test="bookAuthor != null" >
+        book_author = #{bookAuthor},
+      </if>
+      
+      <if test="publishingHouse != null" >
+        publishing_house = #{publishingHouse},
+      </if>
+      
+      <if test="bookOutTime != null" >
+        book_out_time = #{bookOutTime},
+      </if>
+      
+       <if test="bookInfomation != null" >
+         book_infomation = #{ bookInfomation},
+      </if>
+      
+      <if test="bookShelf != null" >
+         book_shelf = #{bookShelf},
+      </if>
+      
+       <if test="bookTypeId != null" >
+         book_type_id = #{bookTypeId},
+      </if>
+      
+        <if test="bookCount != null" >
+         book_count = #{bookCount},
+      </if>
+      
+        <if test="bookImgUrl != null" >
+         book_img_url = #{bookImgUrl},
+      </if>
+      
+        <if test="bookOutSum != null" >
+         book_out_sum = #{bookOutSum}
+      </if>
+      
+    </set>
+    where id = #{id}
+   </update>
+   
+   <delete id="deleteById" parameterType="INTEGER">
+     DELETE FROM books WHERE id=#{id}
+   </delete>
+   <select id="selectCountById" resultType="INTEGER">
+     SELECT book_count FROM books
+   </select>
 </mapper>

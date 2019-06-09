@@ -5,7 +5,7 @@ import java.util.Random;
 
 
 import net.sf.json.JSONObject;
-// 短信工具类 byzhaoxinping
+// 短信工具类 bylisujie
 public class MessageUtil {
    
 	private String accountSid;
@@ -64,7 +64,6 @@ public class MessageUtil {
 		String para="3340";
 		testTemplateSMS(true, accountSid,token,appId, templateId,to,para);//短信发送接口
 	}*/
-	
 	
 	public static JsonResult getMessage(String phoneNumber){
 		JsonResult jr=new JsonResult();
